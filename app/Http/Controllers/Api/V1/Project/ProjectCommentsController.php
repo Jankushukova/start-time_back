@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\project;
+namespace App\Http\Controllers\Api\V1\Project;
 
 use App\CommentLike;
 use App\Project;
@@ -50,6 +50,8 @@ class ProjectCommentsController extends Controller
     {
         $comment = ProjectComment::create($request->all());
         $comment->save();
+        $comment->user;
+        $comment->likes;
         return $comment;
     }
 

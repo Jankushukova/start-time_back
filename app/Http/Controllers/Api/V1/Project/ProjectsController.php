@@ -125,6 +125,7 @@ class ProjectsController extends Controller
         $project->comments;
         $project->updates;
         $project->questions;
+        $project->likes;
         $backersCount = Project::select(DB::raw('projects.id'))
             ->join('project_orders', 'project_orders.project_id','=','projects.id')
             ->where('projects.id','=',$project->id)->count();

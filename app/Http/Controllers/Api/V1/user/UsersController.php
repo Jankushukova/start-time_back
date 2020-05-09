@@ -178,8 +178,10 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-
-        return User::findorFail($id);
+        $user = User::findorFail($id);
+        $user->followers;
+        $user->projects;
+        return $user;
     }
 
 

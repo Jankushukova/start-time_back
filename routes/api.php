@@ -30,6 +30,7 @@ Route::group([
             Route::post('userLogin', 'UsersController@authenticate');//+
             //partners
             Route::get('users/partners', 'UsersController@getPartners');//+
+            Route::get('users/{id}', 'UsersController@show')->where('id', '[0-9]+');//+
             //followers
             Route::get('followers/{id}', 'FollowerController@getFollowers')->where('id', '[0-9]+');//+
             Route::get('followings/{id}', 'FollowerController@getFollowings')->where('id', '[0-9]+');//+
@@ -38,7 +39,7 @@ Route::group([
 
         });
 
-        Route::namespace('project')->group(function () {
+        Route::namespace('Project')->group(function () {
             //project category
             Route::get('project/categories', 'ProjectCategoryController@index');//+
 
@@ -79,7 +80,7 @@ Route::group([
 
 
 
-        Route::namespace('product')->group(function () {
+        Route::namespace('news')->group(function () {
             //news
             Route::get('news', 'NewsController@index')->where('id', '[0-9]+');//+
             Route::get('news/{id}', 'NewsController@show');//+
@@ -113,7 +114,7 @@ Route::group([
 
         Route::group(['middleware' => ['jwt.verify']], function() {
 
-            Route::namespace('project')->group(function () {
+            Route::namespace('Project')->group(function () {
                 //authenticated user profile
                 Route::get('user/projects', 'ProjectsController@getUserProjects');//+
                 //?? Route::get('user/recommendations', 'ProjectCategoryController@index');
@@ -136,6 +137,9 @@ Route::group([
                 //likes
                 Route::post('project/like', ['uses' => 'ProjectLikesController@store', 'as' => 'projects.store']);//+
                 Route::delete('project/like/{id}', ['uses' => 'ProjectLikesController@destroy', 'as' => 'projects.destroy'])->where('id', '[0-9]+');//+
+                //questions
+                Route::post('project/questions', ['uses' => 'ProjectQuestionController@store', 'as' => 'questions.store']);//+
+                Route::delete('project/questions/{id}', ['uses' => 'ProjectQuestionController@destroy', 'as' => 'questions.destroy'])->where('id', '[0-9]+');//+
 
 
             });
@@ -181,7 +185,7 @@ Route::group([
 
 
             Route::group(['middleware' => ['admin']], function() {
-                Route::namespace('project')->group(function () {
+                Route::namespace('Project')->group(function () {
                     //project-category
                     Route::post('project/category/create', ['uses' => 'ProjectCategoryController@store', 'as' => 'projects.store']);//+
                     Route::delete('project/category/delete/{id}', ['uses' => 'ProjectCategoryController@destroy', 'as' => 'projects.destroy'])->where('id', '[0-9]+');//+

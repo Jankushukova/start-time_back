@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Project
-;
+namespace App\Http\Controllers\Api\V1\Project;
 
 use App\Http\Controllers\Controller;
 use App\Project;
@@ -46,7 +45,10 @@ class ProjectQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question = ProjectQuestion::create($request->all());
+        $question->save();
+        $question->user;
+        return $question;
     }
 
     /**
@@ -89,8 +91,10 @@ class ProjectQuestionController extends Controller
      * @param  \App\ProjectQuestion  $projectQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProjectQuestion $projectQuestion)
+    public function destroy($id)
     {
-        //
+        $question = ProjectQuestion::findOrFail($id);
+        $question->delete();
+        return response()->json(['success' => true]);
     }
 }
