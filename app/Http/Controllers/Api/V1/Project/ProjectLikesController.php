@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1\Project;
 
 use App\Http\Controllers\Controller;
+use App\Project;
 use App\ProjectLike;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProjectLikesController extends Controller
 {
@@ -34,8 +36,15 @@ class ProjectLikesController extends Controller
      */
     public function store(Request $request)
     {
-        $like = ProjectLike::create($request->all());
-        $like->save();
+
+        $project = Project::findOrFail($request->project_id);
+        if ($project->liked(JWTAuth::parseToken()->authenticate()->id)){
+            return response()->json(['error' => true]);
+
+        }else{
+            $like = ProjectLike::create($request->all());
+            $like->save();
+        }
         return $like;
     }
 
@@ -84,8 +93,14 @@ class ProjectLikesController extends Controller
      */
     public function destroy($id)
     {
-        $like = ProjectLike::findOrFail($id);
-        $like->delete();
-        return response()->json(['success' => true]);
+        $project = Project::findOrFail($id);
+        if ($project->liked(JWTAuth::parseToken()->authenticate()->id)){
+            $like = ProjectLike::where('project_id', $id)
+                ->where('user_id',JWTAuth::parseToken()->authenticate()->id)->first();
+            $like->delete();
+            return $like;
+
+        }
+        return response()->json(['error' => true]);
     }
 }

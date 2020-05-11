@@ -45,6 +45,7 @@ Route::group([
 
             //project
             Route::get('project/category/{id}', ['uses' => 'ProjectsController@getProjectsOfCategory', 'as' => 'category.projects'])->where('id', '[0-9]+');//+
+            Route::post('project/view/add', ['uses' => 'ProjectsController@addView', 'as' => 'project.view']);//+
             Route::get('project/{id}', ['uses' => 'ProjectsController@show', 'as' => 'project.show'])->where('id', '[0-9]+');//+
             //images
             Route::get('project/images/{id}', ['uses' => 'ProjectImagesController@getImagesOfProject', 'as' => 'project.images'])->where('id', '[0-9]+');//+
@@ -60,6 +61,7 @@ Route::group([
             //updates
             Route::get('project/updates/{id}', ['uses' => 'UpdatesController@getUpdatesOfProject', 'as' => 'project.updates'])->where('id', '[0-9]+');//+
             Route::get('updates/images/{id}', ['uses' => 'UpdatesController@getUpdatesImages', 'as' => 'updates.images'])->where('id', '[0-9]+');//+
+            Route::get('update/{id}', ['uses' => 'UpdatesController@show', 'as' => 'updates.show'])->where('id', '[0-9]+');//+
             //most popular
             Route::get('project/popular', ['uses' => 'ProjectsController@getMostPopular', 'as' => 'projects.popular']);//+
             //questions

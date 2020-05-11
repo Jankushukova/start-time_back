@@ -10,12 +10,23 @@ use App\ProjectOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use function foo\func;
+use function GuzzleHttp\Promise\all;
 
 class ProjectsController extends Controller
 {
     public function __construct()
     {
     }
+
+    public function addView(Request $request){
+        $project = Project::findOrFail($request->project_id);
+        $project->views = $project->views + 1;
+        $project->save();
+        return $project;
+    }
+
 
     public function getAmountOfProjects(){
         return count(Project::all());
@@ -123,9 +134,13 @@ class ProjectsController extends Controller
         $project->images;
         $project->user;
         $project->comments;
-        $project->updates;
+        $project->updates->map(function($item,$key){
+            $item->images;
+            return $item;
+        });
         $project->questions;
         $project->likes;
+        $project['liked'] = $project->liked(JWTAuth::parseToken()->authenticate()->id);
         $backersCount = Project::select(DB::raw('projects.id'))
             ->join('project_orders', 'project_orders.project_id','=','projects.id')
             ->where('projects.id','=',$project->id)->count();

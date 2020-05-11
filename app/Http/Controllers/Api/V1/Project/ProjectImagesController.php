@@ -40,11 +40,19 @@ class ProjectImagesController extends Controller
     public function store(Request $request)
     {
         foreach ($request->all() as $file){
-            $image = ProjectImage::create($file);
-            $image->save();
+//            if ($file->image->hasFile('image')) {
+//                $imfile      = $request->file('image');
+//                $filename  = $imfile->getClientOriginalName();
+//                $extension = $imfile->getClientOriginalExtension();
+//                $picture   = date('His').'-'.$filename;
+//                $file->move(public_path('img'), $picture);
+//            }
+//            $image = ProjectImage::create($file);
+//            $image->save();
+
+            return $file;
 
         }
-        return $image;
     }
 
     /**

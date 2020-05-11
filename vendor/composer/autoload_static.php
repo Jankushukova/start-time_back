@@ -18,10 +18,10 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -128,6 +128,7 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         ),
         'F' => 
         array (
+            'Fruitcake\\Cors\\' => 15,
             'Fideloper\\Proxy\\' => 16,
             'Faker\\' => 6,
         ),
@@ -154,6 +155,7 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         ),
         'A' => 
         array (
+            'Asm89\\Stack\\' => 12,
             'App\\' => 4,
         ),
     );
@@ -377,6 +379,10 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Fruitcake\\Cors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+        ),
         'Fideloper\\Proxy\\' => 
         array (
             0 => __DIR__ . '/..' . '/fideloper/proxy/src',
@@ -421,6 +427,10 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         array (
             0 => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src',
         ),
+        'Asm89\\Stack\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -464,6 +474,7 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         'App\\Http\\Controllers\\API\\V1\\product\\ProductViewController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/product/ProductViewController.php',
         'App\\Http\\Controllers\\Api\\V1\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Api\\V1\\Project\\ProjectCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/ProjectCategoryController.php',
+        'App\\Http\\Controllers\\Api\\V1\\Project\\ProjectCommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/ProjectCommentsController.php',
         'App\\Http\\Controllers\\Api\\V1\\Project\\ProjectGiftsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/ProjectGiftsController.php',
         'App\\Http\\Controllers\\Api\\V1\\Project\\ProjectImagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/ProjectImagesController.php',
         'App\\Http\\Controllers\\Api\\V1\\Project\\ProjectLikesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/ProjectLikesController.php',
@@ -472,7 +483,6 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         'App\\Http\\Controllers\\Api\\V1\\Project\\ProjectsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/ProjectsController.php',
         'App\\Http\\Controllers\\Api\\V1\\Project\\UpdatesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/UpdatesController.php',
         'App\\Http\\Controllers\\Api\\V1\\product\\ProductLikeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/product/ProductLikeController.php',
-        'App\\Http\\Controllers\\Api\\V1\\project\\ProjectCommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/Project/ProjectCommentsController.php',
         'App\\Http\\Controllers\\Api\\V1\\user\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/V1/user/UsersController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -527,6 +537,8 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         'App\\Update' => __DIR__ . '/../..' . '/app/Update.php',
         'App\\UpdateImage' => __DIR__ . '/../..' . '/app/UpdateImage.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
+        'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
         'BeyondCode\\DumpServer\\Dumper' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/Dumper.php',
@@ -1154,6 +1166,8 @@ class ComposerStaticInit87077f49780decb447ae3d8469ae55c8
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/ValidGenerator.php',
         'Fideloper\\Proxy\\TrustProxies' => __DIR__ . '/..' . '/fideloper/proxy/src/TrustProxies.php',
         'Fideloper\\Proxy\\TrustedProxyServiceProvider' => __DIR__ . '/..' . '/fideloper/proxy/src/TrustedProxyServiceProvider.php',
+        'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
+        'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',

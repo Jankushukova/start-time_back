@@ -65,8 +65,9 @@ class UpdatesController extends Controller
      */
     public function show($id)
     {
-
-        return Update::findorFail($id);
+        $update = Update::findorFail($id);
+        $update->images;
+        return $update;
     }
 
 

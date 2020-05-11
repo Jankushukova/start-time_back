@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('content');
             $table->string('video');
             $table->string('goal');
+            $table->integer('views')->default(0);
             $table->bigInteger('gathered')->default(0);
             $table->boolean('active')->default(false);
             $table->softDeletes();

@@ -19,6 +19,7 @@ class Project extends Model
         'active',
         'owner_id',
         'category_id',
+        'views'
     ];
 
 
@@ -59,6 +60,11 @@ class Project extends Model
 
     public function likes(){
         return $this->hasMany('App\ProjectLike');
+    }
+
+    public function liked($id){
+        $likes = ProjectLike::where('project_id',$this->id)->get();
+        return $likes->contains('user_id',$id);
     }
 
 
