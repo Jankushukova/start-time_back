@@ -99,6 +99,9 @@ class ProjectsController extends Controller
         $projects = ProjectCategory::findOrFail($id)->projects->where('active','=','1');
         $projects = $projects->map(function ($item, $key){
             $item->images;
+            $item->likes;
+            $item['liked'] = $item->liked(JWTAuth::parseToken()->authenticate()->id);
+
             $item->user;
             return $item;
         });

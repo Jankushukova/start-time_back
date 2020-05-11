@@ -20,27 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b531a1e4-7462-4ea8-aed8-6da446ddf591" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/794e1c7c-3cbb-41c7-a689-67e432bd26ea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/794e1c7c-3cbb-41c7-a689-67e432bd26ea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/start-time_back.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/start-time_back.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectImagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectImagesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectLikesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectLikesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/UpdatesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/UpdatesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CORS.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CORS.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Project.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_090255_create_projects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_090255_create_projects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +236,7 @@
       <workItem from="1588836287046" duration="13774000" />
       <workItem from="1588994159481" duration="1154000" />
       <workItem from="1589000182672" duration="7656000" />
-      <workItem from="1589167011309" duration="16909000" />
+      <workItem from="1589167011309" duration="18066000" />
     </task>
     <task id="LOCAL-00001" summary="seoncd commit">
       <created>1586912562186</created>
@@ -278,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589026256709</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="user profile fixed&#10;project details fixed">
+      <created>1589197378244</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1589197378244</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +291,8 @@
     <MESSAGE value="seoncd commit" />
     <MESSAGE value="small commit" />
     <MESSAGE value="projects entity changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="projects entity changed" />
+    <MESSAGE value="user profile fixed&#10;project details fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="user profile fixed&#10;project details fixed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="83" y="146" width="732" height="644" key="#Inspections" timestamp="1588842547238">
@@ -328,10 +317,10 @@
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588801331335" />
     <state x="671" y="240" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589188823623" />
-    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2" timestamp="1589026254493">
+    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2" timestamp="1589197372276">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2/70.27.1850.1053@70.27.1850.1053" timestamp="1589026254493" />
+    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2/70.27.1850.1053@70.27.1850.1053" timestamp="1589197372276" />
     <state x="731" y="240" width="447" height="520" key="FileChooserDialogImpl" timestamp="1588995292102">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
@@ -347,11 +336,11 @@
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587312519942" />
     <state x="404" y="100" width="1022" height="737" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588995317419" />
-    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1589026263612">
+    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1589197381884">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586982458731" />
-    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053@70.27.1850.1053" timestamp="1589026263612" />
+    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053@70.27.1850.1053" timestamp="1589197381884" />
     <state x="806" y="27" width="367" height="326" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1588837519273">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
