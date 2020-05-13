@@ -10,6 +10,7 @@ use App\ProjectOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use function foo\func;
 use function GuzzleHttp\Promise\all;
@@ -100,7 +101,12 @@ class ProjectsController extends Controller
         $projects = $projects->map(function ($item, $key){
             $item->images;
             $item->likes;
-            $item['liked'] = $item->liked(JWTAuth::parseToken()->authenticate()->id);
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                $item['liked'] = $item->liked($user->id);
+
+            } catch (JWTException $e) {
+            }
 
             $item->user;
             return $item;

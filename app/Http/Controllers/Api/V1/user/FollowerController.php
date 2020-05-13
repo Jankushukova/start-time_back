@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V1\user;
 
 use App\Follower;
 use App\Http\Controllers\Controller;
