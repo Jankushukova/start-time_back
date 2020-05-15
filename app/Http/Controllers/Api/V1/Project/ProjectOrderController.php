@@ -10,6 +10,7 @@ use App\ProjectOrder;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectOrderController extends Controller
 {
@@ -17,6 +18,10 @@ class ProjectOrderController extends Controller
     {
         return ProjectOrder::all();
     }
+
+
+
+
 
 
 
@@ -28,8 +33,13 @@ class ProjectOrderController extends Controller
 
 
     public function getUserBakers($id){
-        $projects = (new \App\Http\Controllers\Api\V1\ProjectsController)->getUserProjects($id);
-        return $this->getBakersOfProjects($projects);
+
+        return User::all()
+            ->whereIn('id',( Project::select(DB::raw('project_orders.user_id'))
+            ->join('project_orders', 'projects.id','=','project_orders.project_id')
+            ->get()->map(function($item,$key){
+                return $item['user_id'];
+            })))->values();
     }
 
     public function getPaymentsOfProject($id){

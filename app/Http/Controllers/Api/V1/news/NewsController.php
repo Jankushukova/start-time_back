@@ -22,6 +22,7 @@ class NewsController extends Controller
     {
         return News::all()->map(function($item, $key){
             $item->likes;
+            $item->images;
             try {
                 $user = JWTAuth::parseToken()->authenticate();
                 $item['liked'] = $item->liked($user->id);

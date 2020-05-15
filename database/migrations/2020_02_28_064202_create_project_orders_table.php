@@ -19,7 +19,7 @@ class CreateProjectOrdersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
-            $table->boolean('viewed');
+            $table->boolean('viewed')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

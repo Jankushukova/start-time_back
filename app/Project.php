@@ -28,7 +28,7 @@ class Project extends Model
         return $this->belongsTo('App\User','owner_id');
     }
 
-    public function backers(){
+    public function bakers(){
         return $this->belongsToMany('App\User', 'project_orders', 'project_id', 'user_id');
     }
 

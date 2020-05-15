@@ -70,7 +70,6 @@ Route::group([
 
             //guest user profile
             Route::get('user/projects/{id}', 'ProjectsController@getUserProjects')->where('id', '[0-9]+');//+
-            Route::get('projects/user/baked/{id}', 'ProjectOrderController@getUserBakedProjects')->where('id', '[0-9]+');//+
 
             //statistics
             Route::get('statistics/project', 'ProjectsController@getAmountOfProjects');
@@ -119,7 +118,9 @@ Route::group([
 
             Route::namespace('Project')->group(function () {
                 //authenticated user profile
-                Route::get('user/projects', 'ProjectsController@getUserProjects');//+
+                Route::get('user/bakers/{id}', 'ProjectOrderController@getUserBakers')->where('id', '[0-9]+');//+
+                Route::get('projects/user/baked/{id}', 'ProjectOrderController@getUserBakedProjects')->where('id', '[0-9]+');//+
+
                 //?? Route::get('user/recommendations', 'ProjectCategoryController@index');
 
 
@@ -174,6 +175,7 @@ Route::group([
             Route::namespace('user')->group(function () {
                 // user
                 Route::get('user', 'UsersController@getAuthenticatedUser');//+
+                Route::get('users/profile/information', 'UsersController@UserProfileInformation');//+
 
                 //follower
                 Route::post('followers', ['uses' => 'FollowerController@store', 'as' => 'followers.store']);//+

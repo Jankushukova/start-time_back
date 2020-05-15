@@ -23,27 +23,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/794e1c7c-3cbb-41c7-a689-67e432bd26ea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/794e1c7c-3cbb-41c7-a689-67e432bd26ea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/CommentLikeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/CommentLikeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectOrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsCommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsCommentsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsLikesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsLikesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductCategoryController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductLikeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductLikeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/SubsrcibersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/SubscribersController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/News.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/News.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/NewsComment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/NewsComment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProductCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subscribers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProjectImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProjectImage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Subsrcibers.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/SubsrcibersFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/SubsrcibersFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_105858_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_105858_create_products_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_25_064413_create_news_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_25_064413_create_news_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_18_003616_create_subsrcibers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_18_003616_create_subscribers_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_28_064202_create_project_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_28_064202_create_project_orders_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +159,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PhpstormProjects/untitled" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -262,6 +247,8 @@
       <workItem from="1589167011309" duration="18126000" />
       <workItem from="1589356275318" duration="2325000" />
       <workItem from="1589426090303" duration="19927000" />
+      <workItem from="1589517652149" duration="436000" />
+      <workItem from="1589525246237" duration="12114000" />
     </task>
     <task id="LOCAL-00001" summary="seoncd commit">
       <created>1586912562186</created>
@@ -305,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589370933442</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="products and news part added">
+      <created>1589517683138</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1589517683138</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +327,8 @@
     <MESSAGE value="user profile fixed&#10;project details fixed" />
     <MESSAGE value="user profile fixed&#10;project details fixed 2" />
     <MESSAGE value="little changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="little changes" />
+    <MESSAGE value="products and news part added" />
+    <option name="LAST_COMMIT_MESSAGE" value="products and news part added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="83" y="146" width="732" height="644" key="#Inspections" timestamp="1588842547238">
@@ -354,20 +349,20 @@
     </state>
     <state x="574" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1587166234021" />
     <state x="761" y="27" width="422" height="538" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589429539623" />
-    <state x="671" y="240" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589452005470">
+    <state x="671" y="240" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589542135805">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588801331335" />
-    <state x="671" y="240" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589452005470" />
-    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2" timestamp="1589370933250">
+    <state x="671" y="240" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589542135805" />
+    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2" timestamp="1589517682729">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2/70.27.1850.1053@70.27.1850.1053" timestamp="1589370933250" />
-    <state x="731" y="240" width="447" height="520" key="FileChooserDialogImpl" timestamp="1588995292102">
+    <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2/70.27.1850.1053@70.27.1850.1053" timestamp="1589517682729" />
+    <state x="731" y="240" width="447" height="520" key="FileChooserDialogImpl" timestamp="1589525357283">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587312534956" />
-    <state x="731" y="240" width="447" height="520" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588995292102" />
+    <state x="731" y="240" width="447" height="520" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1589525357283" />
     <state x="832" y="423" width="330" height="207" key="Github.ShareDialog" timestamp="1588994352532">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
@@ -378,21 +373,21 @@
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587312519942" />
     <state x="404" y="100" width="1022" height="737" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588995317419" />
-    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1589370934985">
+    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1589517685014">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586982458731" />
-    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053@70.27.1850.1053" timestamp="1589370934985" />
+    <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053@70.27.1850.1053" timestamp="1589517685014" />
     <state x="806" y="27" width="367" height="333" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1589449417195">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="611" y="0" width="312" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1588539405186" />
     <state x="806" y="27" width="367" height="333" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/70.27.1850.1053@70.27.1850.1053" timestamp="1589449417195" />
-    <state x="517" y="265" width="526" height="464" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1589450159715">
+    <state x="517" y="265" width="526" height="464" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1589529296920">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="612" y="185" width="464" height="454" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1588806122022" />
-    <state x="517" y="265" width="526" height="464" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589450159715" />
+    <state x="517" y="265" width="526" height="464" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589529296920" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1587311579485">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

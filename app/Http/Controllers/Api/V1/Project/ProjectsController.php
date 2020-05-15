@@ -7,6 +7,7 @@ use App\Project;
 use App\ProjectCategory;
 use App\ProjectLike;
 use App\ProjectOrder;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -91,8 +92,19 @@ class ProjectsController extends Controller
     }
 
 
-    public function getProjectProjects($id){
-        return (Project::findorFail($id))->projects;
+    public function getUserProjects($id){
+        return User::findOrFail($id)->projects->map(function($item, $key){
+            $item->likes;
+            $item->images;
+            $item->bakers;
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                $item['liked'] = $item->liked($user->id);
+
+            } catch (JWTException $e) {
+            }
+            return $item;
+        });
     }
 
     public function getProjectsOfCategory($id)

@@ -4,6 +4,8 @@
 namespace App\Http\Controllers\Api\V1\user;
 
 
+use App\Http\Controllers\Api\V1\Project\ProjectOrderController;
+use App\Http\Controllers\Api\V1\Project\ProjectsController;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
@@ -23,7 +25,15 @@ class UsersController extends Controller
 
     }
 
-
+    public function UserProfileInformation(){
+        $user = JWTAuth::parseToken()->authenticate();
+        $user['projectsCount'] =count((new ProjectsController())->getUserProjects($user->id));
+        $user['bakersCount'] =count((new ProjectOrderController)->getUserBakers($user->id));
+        $user['bakedCount'] =count((new ProjectOrderController)->getUserBakedProjects($user->id));
+        $user['followersCount'] =count((new FollowerController())->getFollowers($user->id));
+        $user['followedCount'] =count((new FollowerController())->getFollowings($user->id));
+        return $user;
+    }
     public function getPartners(){
         return User::all()->where('partner', '=', 1)->values();
     }
