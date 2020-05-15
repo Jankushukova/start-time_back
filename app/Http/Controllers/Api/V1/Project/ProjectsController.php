@@ -149,7 +149,12 @@ class ProjectsController extends Controller
         });
         $project->questions;
         $project->likes;
-        $project['liked'] = $project->liked(JWTAuth::parseToken()->authenticate()->id);
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+            $project['liked'] = $project->liked($user->id);
+
+        } catch (JWTException $e) {
+        }
         $backersCount = Project::select(DB::raw('projects.id'))
             ->join('project_orders', 'project_orders.project_id','=','projects.id')
             ->where('projects.id','=',$project->id)->count();

@@ -6,12 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProductController extends Controller
 {
+    public function addView(Request $request){
+        $product = Product::findOrFail($request->product_id);
+        $product->views = $product->views + 1;
+        $product->save();
+        return $product;
+    }
     public function index()
     {
-        return Product::all();
+        return Product::all()->map(function($item, $key){
+            $item->images;
+            $item->likes;
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                $item['liked'] = $item->liked($user->id);
+
+            } catch (JWTException $e) {
+            }
+            return $item;
+        });
     }
 
     public function getMostPopular(){
@@ -27,7 +45,7 @@ class ProductController extends Controller
             })))->values();
 
         $products = $products->map(function ($item, $key){
-            $item['images'] = Product::findOrFail($item->id)->images;
+            $item->images;
             return $item;
         });
 
@@ -71,7 +89,9 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        return Product::findorFail($id);
+        $product =  Product::findorFail($id);
+        $product->images;
+        return $product;
     }
 
 

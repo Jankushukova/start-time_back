@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1\user;
 
-use App\Subsrcibers;
+use App\Http\Controllers\Controller;
+use App\Subscribers;
 use Illuminate\Http\Request;
 
-class SubsrcibersController extends Controller
+class SubscribersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class SubsrcibersController extends Controller
      */
     public function index()
     {
-        return Subsrcibers::all();
+        return Subscribers::all();
     }
 
     /**
@@ -35,29 +36,29 @@ class SubsrcibersController extends Controller
      */
     public function store(Request $request)
     {
-        $sb = Subsrcibers::create($request->all());
+        $sb = Subscribers::create($request->all());
         $sb->save();
         return $sb;    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Subsrcibers  $subsrcibers
+     * @param  \App\Subscribers  $subsrcibers
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Subsrcibers::findorFail($id);
+        return Subscribers::findorFail($id);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Subsrcibers  $subsrcibers
+     * @param  \App\Subscribers  $subsrcibers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subsrcibers $subsrcibers)
+    public function edit(Subscribers $subsrcibers)
     {
         //
     }
@@ -66,12 +67,12 @@ class SubsrcibersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subsrcibers  $subsrcibers
+     * @param  \App\Subscribers  $subsrcibers
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $sb = Subsrcibers::findorFail($id);
+        $sb = Subscribers::findorFail($id);
         $sb->update($request->all());
         return $sb;
     }
@@ -79,12 +80,12 @@ class SubsrcibersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Subsrcibers  $subsrcibers
+     * @param  \App\Subscribers  $subsrcibers
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $sb = Subsrcibers::findOrFail($id);
+        $sb = Subscribers::findOrFail($id);
         $sb->delete();
         return response()->json(['success' => true]);
     }

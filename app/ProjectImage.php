@@ -8,6 +8,6 @@ class ProjectImage extends Model
 {
     protected $fillable = [
         'image',
-        'project_id'
+        'product_id'
     ];
 }

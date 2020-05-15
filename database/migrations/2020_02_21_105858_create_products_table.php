@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('cost');
+            $table->integer('views');
             $table->timestamps();
             $table->softDeletes();
         });

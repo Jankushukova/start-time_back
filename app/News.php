@@ -11,6 +11,8 @@ class News extends Model
     protected $fillable = [
         'title',
         'description',
+        'content',
+        'views'
     ];
 
     public function likes(){
@@ -23,5 +25,10 @@ class News extends Model
 
     public function images(){
         return $this->hasMany('App\NewsImage', 'news_id');
+    }
+
+    public function liked($id){
+        $likes = NewsLike::where('news_id',$this->id)->get();
+        return $likes->contains('user_id',$id);
     }
 }

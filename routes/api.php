@@ -36,6 +36,7 @@ Route::group([
             Route::get('followings/{id}', 'FollowerController@getFollowings')->where('id', '[0-9]+');//+
             //subscribe
             Route::post('subscribe', ['uses' => 'SubscribersController@store', 'as' => 'subscribe.store']);//+
+            Route::get('open', 'UsersController@open');
 
         });
 
@@ -86,30 +87,30 @@ Route::group([
             //news
             Route::get('news', 'NewsController@index')->where('id', '[0-9]+');//+
             Route::get('news/{id}', 'NewsController@show');//+
+            Route::post('news/view/add', ['uses' => 'NewsController@addView', 'as' => 'news.view']);//+
+
             //images
             Route::get('news/images/{id}', ['uses' => 'NewsImagesController@getImagesOfNews', 'as' => 'news.images'])->where('id', '[0-9]+');//+
             //likes
             Route::get('news/like/{id}', ['uses' => 'NewsLikesController@getLikesOfNews', 'as' => 'news.likes'])->where('id', '[0-9]+');//+
             //comments
-            Route::get('news/comments/{id}', ['uses' => 'NewsCommentsController@getCommentsOfNews', 'as' => 'news.comments'])->where('id', '[0-9]+');//+
+            Route::get('news/comment/{id}', ['uses' => 'NewsCommentsController@getCommentsOfNews', 'as' => 'news.comments'])->where('id', '[0-9]+');//+
 
         });
 
 
         Route::namespace('product')->group(function () {
             //shop
-            Route::get('product/category/{id}', ['uses' => 'ProductCategoryController@getProductsOfCategory', 'as' => 'category.products'])->where('id', '[0-9]+');//+
+            Route::get('product', ['uses' => 'ProductController@index', 'as' => 'products.index']);//+
             Route::get('product/show/{id}', ['uses' => 'ProductController@show', 'as' => 'products.show'])->where('id', '[0-9]+');//+
             Route::get('product/images/{id}', ['uses' => 'ProductImageController@getImages', 'as' => 'product.images'])->where('id', '[0-9]+');//+
-            //category
-            Route::get('product/category', ['uses' => 'ProductCategoryController@index', 'as' => 'category.index']);//+
+            Route::post('product/view/add', ['uses' => 'ProductController@addView', 'as' => 'product.view']);//+
             //most popular
             Route::get('product/popular', ['uses' => 'ProductController@getMostPopular', 'as' => 'products.popular']);//+
 
         });
 
         //general
-        Route::get('open', 'UsersController@open');
         Route::post('payment', ['uses' => 'PaymentController@store', 'as' => 'payment.store']);//+
         Route::get('comment/likes/{id}', ['uses' => 'CommentLikeController@getLikesOfComment', 'as' => 'comment.likes'])->where('id', '[0-9]+');//+
 
@@ -151,6 +152,9 @@ Route::group([
                 Route::post('product', ['uses' => 'ProductController@store', 'as' => 'product.store']);//+
                 Route::post('product/create/images', ['uses' => 'ProductImageController@store', 'as' => 'images.store']);//+
                 Route::post('product/order', ['uses' => 'ProductOrderController@store', 'as' => 'order.store']);//+
+                //likes
+                Route::post('product/like', ['uses' => 'ProductLikeController@store', 'as' => 'product.store']);//+
+                Route::delete('product/like/{id}', ['uses' => 'ProductLikeController@destroy', 'as' => 'product.destroy'])->where('id', '[0-9]+');//+
 
 
             });
@@ -181,7 +185,7 @@ Route::group([
             Route::get('payments', ['uses' => 'PaymentController@getMyPayments', 'as' => 'my.payments']);//+
 
             //comment
-            Route::post('comment/like', ['uses' => 'CommentLikeController@storeForProjectComment', 'as' => 'comment.store']);//+
+            Route::post('comment/like', ['uses' => 'CommentLikeController@store', 'as' => 'comment.store']);//+
             Route::delete('comment/like/{id}', ['uses' => 'CommentLikeController@destroy', 'as' => 'comment.destroy'])->where('id', '[0-9]+');//+
 
 

@@ -5,14 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductCategory extends Model
+class Subscribers extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'name'
+        'email'
     ];
-
-    public function products(){
-        return $this->hasMany('App\Product');
-    }
 }

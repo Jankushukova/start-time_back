@@ -12,16 +12,15 @@ class Product extends Model
         'title',
         'description',
         'cost',
-        'category_id'
+        'views'
+
     ];
 
     public function likes(){
         return $this->hasMany('App\ProductLike');
     }
 
-    public function category(){
-        return $this->belongsTo('App\ProductCategory');
-    }
+
 
     public function ordered(){
         return $this->belongsToMany('App\User', 'product_orders', 'product_id', 'user_id');
@@ -29,6 +28,11 @@ class Product extends Model
 
     public function images(){
         return $this->hasMany('App\ProductImage');
+    }
+
+    public function liked($id){
+        $likes = ProductLike::where('product_id',$this->id)->get();
+        return $likes->contains('user_id',$id);
     }
 
 }

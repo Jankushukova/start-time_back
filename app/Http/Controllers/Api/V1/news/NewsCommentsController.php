@@ -5,7 +5,10 @@ namespace App\Http\Controllers\API\V1\news;
 use App\Http\Controllers\Controller;
 use App\News;
 use App\NewsComment;
+use App\ProjectComment;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class NewsCommentsController extends Controller
 {
@@ -23,7 +26,19 @@ class NewsCommentsController extends Controller
      */
     public function getCommentsOfNews($id)
     {
-        return News::findOrFail($id)->comments;
+        return News::findOrFail($id)->comments->map(function($item, $key){
+            $item['likes'] = NewsComment::findOrFail($item->id)->likes->map(function ($item,$key){
+                return $item['id'];
+            });
+            $item->user;
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                $item['liked'] = $item->liked($user->id);
+
+            } catch (JWTException $e) {
+            }
+            return $item;
+        });
     }
 
 
@@ -37,6 +52,8 @@ class NewsCommentsController extends Controller
     {
         $comment = NewsComment::create($request->all());
         $comment->save();
+        $comment->user;
+        $comment->likes;
         return $comment;
     }
 

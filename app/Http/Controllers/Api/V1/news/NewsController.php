@@ -5,12 +5,31 @@ namespace App\Http\Controllers\API\V1\news;
 use App\Http\Controllers\Controller;
 use App\News;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class NewsController extends Controller
 {
+
+    public function addView(Request $request){
+        $news = News::findOrFail($request->news_id);
+        $news->views = $news->views + 1;
+        $news->save();
+        return $news;
+    }
+
     public function index()
     {
-        return NewsImage::all();
+        return News::all()->map(function($item, $key){
+            $item->likes;
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                $item['liked'] = $item->liked($user->id);
+
+            } catch (JWTException $e) {
+            }
+            return $item;
+        });
     }
 
 
@@ -22,7 +41,7 @@ class NewsController extends Controller
      */
     public function getImagesOfNews($id)
     {
-        return NewsImage::where('project_id',$id);
+        return News::where('project_id',$id);
     }
 
 
@@ -34,7 +53,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $image = NewsImage::create($request->all());
+        $image = News::create($request->all());
         $image->save();
         return $image;
     }
@@ -48,7 +67,13 @@ class NewsController extends Controller
     public function show($id)
     {
 
-        return NewsImage::findorFail($id);
+        $news = News::findorFail($id);
+        $news->images;
+        $news->comments->map(function($item, $key){
+            $item->user;
+            return $item;
+        });
+        return $news;
     }
 
 
@@ -71,7 +96,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image = NewsImage::findorFail($id);
+        $image = News::findorFail($id);
         $image->update($request->all());
         return $image;
     }
@@ -84,7 +109,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $image = NewsImage::findOrFail($id);
+        $image = News::findOrFail($id);
         $image->delete();
         return response()->json(['success' => true]);
     }

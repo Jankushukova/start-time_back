@@ -5,7 +5,10 @@ namespace App\Http\Controllers\API\V1\news;
 use App\Http\Controllers\Controller;
 use App\News;
 use App\NewsLike;
+use App\Project;
+use App\ProjectLike;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class NewsLikesController extends Controller
 {
@@ -35,8 +38,14 @@ class NewsLikesController extends Controller
      */
     public function store(Request $request)
     {
-        $like = NewsLike::create($request->all());
-        $like->save();
+        $news = News::findOrFail($request->news_id);
+        if ($news->liked(JWTAuth::parseToken()->authenticate()->id)){
+            return response()->json(['error' => true]);
+
+        }else{
+            $like = NewsLike::create($request->all());
+            $like->save();
+        }
         return $like;
     }
 
@@ -85,8 +94,15 @@ class NewsLikesController extends Controller
      */
     public function destroy($id)
     {
-        $like = NewsLike::findOrFail($id);
-        $like->delete();
-        return response()->json(['success' => true]);
+
+        $news = News::findOrFail($id);
+        if ($news->liked(JWTAuth::parseToken()->authenticate()->id)){
+            $like = NewsLike::where('news_id', $id)
+                ->where('user_id',JWTAuth::parseToken()->authenticate()->id)->first();
+            $like->delete();
+            return $like;
+
+        }
+        return response()->json(['error' => true]);
     }
 }

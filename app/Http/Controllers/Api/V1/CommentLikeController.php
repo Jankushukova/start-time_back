@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\CommentLike;
 use App\Http\Controllers\Controller;
+use App\NewsComment;
 use App\ProjectComment;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -35,15 +36,24 @@ class CommentLikeController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function storeForProjectComment(Request $request)
+    public function store(Request $request)
     {
-        $comment = ProjectComment::findOrFail($request->project_comment_id);
-        if ($comment->liked(JWTAuth::parseToken()->authenticate()->id)){
-            return response()->json(['error' => true]);
+        if($comment = ProjectComment::find($request->project_comment_id)){
+            if ($comment->liked(JWTAuth::parseToken()->authenticate()->id)){
+                return response()->json(['error' => true]);
 
-        }else{
-            $like = CommentLike::create($request->all());
-            $like->save();
+            }else{
+                $like = CommentLike::create($request->all());
+                $like->save();
+            }
+        }if($comment = NewsComment::find($request->news_comment_id)){
+            if ($comment->liked(JWTAuth::parseToken()->authenticate()->id)){
+                return response()->json(['error' => true]);
+
+            }else{
+                $like = CommentLike::create($request->all());
+                $like->save();
+            }
         }
         return $like;
     }
@@ -93,14 +103,25 @@ class CommentLikeController extends Controller
      */
     public function destroy($id)
     {
-        $comment = ProjectComment::findOrFail($id);
-        if ($comment->liked(JWTAuth::parseToken()->authenticate()->id)){
-            $like = CommentLike::where('project_comment_id', $id)
-        ->where('user_id',JWTAuth::parseToken()->authenticate()->id)->first();
-            $like->delete();
-            return $like;
+        if($comment = ProjectComment::find($id)){
+            if ($comment->liked(JWTAuth::parseToken()->authenticate()->id)){
+                $like = CommentLike::where('project_comment_id', $id)
+            ->where('user_id',JWTAuth::parseToken()->authenticate()->id)->first();
+                $like->delete();
+                return $like;
 
+            }
         }
+        if($comment = NewsComment::find($id)){
+            if ($comment->liked(JWTAuth::parseToken()->authenticate()->id)){
+                $like = CommentLike::where('news_comment_id', $id)
+                    ->where('user_id',JWTAuth::parseToken()->authenticate()->id)->first();
+                $like->delete();
+                return $like;
+
+            }
+        }
+
         return response()->json(['error' => true]);
     }
 }
