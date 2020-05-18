@@ -16,6 +16,7 @@ class CreateProjectQuestionsTable extends Migration
         Schema::create('project_questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('question');
+            $table->string('answer')->default(null);
             $table->boolean('viewed')->default(false);
 
             $table->timestamps();

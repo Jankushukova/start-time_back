@@ -12,7 +12,8 @@ class ProjectQuestion extends Model
         'question',
         'user_id',
         'project_id',
-        'viewed'
+        'viewed',
+        'answer'
     ];
 
     public function user()

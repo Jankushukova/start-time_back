@@ -35,9 +35,12 @@ class ProjectGiftsController extends Controller
      */
     public function store(Request $request)
     {
-        $gift = ProjectGift::create($request->all());
-        $gift->save();
-        return $gift;
+        foreach ($request->all() as $gift){
+            $gift = ProjectGift::create($gift);
+            $gift->save();
+         }
+
+        return response()->json(['success' => true]);
     }
 
     /**
