@@ -63,7 +63,7 @@ class ProjectsController extends Controller
         })))->where('active','=','1')->values();
 
         $projects = $projects->map(function ($item, $key){
-            $item->images;
+            $item->images = this->setImagePath($item->images);
             $item->user;
             return $item;
         });
@@ -71,6 +71,14 @@ class ProjectsController extends Controller
         return $projects;
 
 
+    }
+    
+    public function setImagePath($images){
+        return $images->map(function($item, $key){
+            $item->image = asset($item->image);
+            return $item;
+        });
+    
     }
 
 
@@ -95,7 +103,7 @@ class ProjectsController extends Controller
     public function getUserProjects($id){
         return User::findOrFail($id)->projects->map(function($item, $key){
             $item->likes;
-            $item->images;
+            $item->images = this->setImagePath($item->images);
             $item->bakers;
             try {
                 $user = JWTAuth::parseToken()->authenticate();
@@ -111,7 +119,7 @@ class ProjectsController extends Controller
     {
         $projects = ProjectCategory::findOrFail($id)->projects->where('active','=','1');
         $projects = $projects->map(function ($item, $key){
-            $item->images;
+            $item->images = this->setImagePath($item->images);
             $item->likes;
             try {
                 $user = JWTAuth::parseToken()->authenticate();
@@ -152,7 +160,7 @@ class ProjectsController extends Controller
     public function show($id)
     {
         $project = Project::findorFail($id);
-        $project->images;
+        $project->images = this->setImagePath($project->images);
         $project->user;
         $project->comments;
         $project->updates->map(function($item,$key){
