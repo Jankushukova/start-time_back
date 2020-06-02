@@ -18,12 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('firstname',255);
             $table->string('lastname',255);
             $table->string('phone_number',255);
-            $table->string('image',255)->default('../../../../../assets/images/4_0.png');
-            $table->string('biography',255)->nullable();
+            $table->string('image',255)->default('images/user/11_0.png');
+            $table->text('biography')->nullable();
             $table->string('email',255)->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
             $table->string('password',255);
-            $table->boolean('partner',255)->default(false);
+            $table->boolean('partner')->default(false);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

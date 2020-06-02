@@ -10,6 +10,6 @@ class Follower extends Model
     use SoftDeletes;
     protected $fillable = [
         'following_id',
-        'follower_id',
+        'followed_id',
     ];
 }

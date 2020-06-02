@@ -16,4 +16,8 @@ class ProductImage extends Model
     public function product(){
         return $this->belongsTo('App\Product');
     }
+    public function getImageAttribute($key)
+    {
+        return asset($key);
+    }
 }

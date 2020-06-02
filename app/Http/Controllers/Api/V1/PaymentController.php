@@ -3,93 +3,60 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Payment;
+use App\ProjectOrder;
+use App\ProjectPayment;
+use Dosarkz\EPayKazCom\Facades\Epay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 
 class PaymentController extends Controller
 {
-    public function index()
-    {
-        return NewsImage::all();
+    public static function basicAuth($order, $sum){
+        $pay =  Epay::basicAuth([
+            'order_id' => $order->id,
+            'currency' => '398',
+            'amount' => $sum,
+            'email' => $order->email,
+            'phone_number' => $order->phone_number,
+            'hashed' => true,
+        ]);
+        $url = $pay->generateUrl();
+        return $url;
     }
 
-    public function getMyPayments(){
-        return (Auth::user())->payments;
+    public function checkPay(){
+        $checkPay = Epay::checkPay( [ 'order_id' => '1' ] );
+
+        $response = Epay::request( $checkPay->generateUrl() );
+
+        return $response;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getImagesOfNews($id)
-    {
-        return NewsImage::where('project_id',$id);
+    public function controlPay(){
+        $controlPay = Epay::controlPay( [
+            'order_id' => '01111111111',
+            'amount' => 9999,
+            'approval_code' => '170407',
+            'reference' => '180711170407',
+            'currency' => '398',
+            'command_type' => 'complete',
+            'reason' => 'for test'
+        ] );
+
+        $response = Epay::request( $controlPay->generateUrl() );
+        return $response;
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $image = NewsImage::create($request->all());
-        $image->save();
-        return $image;
+    public function success(Request $request){
+        error_log('success');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-        return NewsImage::findorFail($id);
+    public function failure(Request $request){
+        error_log("failed payment");
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $image = NewsImage::findorFail($id);
-        $image->update($request->all());
-        return $image;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $image = NewsImage::findOrFail($id);
-        $image->delete();
-        return response()->json(['success' => true]);
-    }
 }

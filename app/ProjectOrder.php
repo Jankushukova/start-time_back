@@ -15,14 +15,26 @@ class ProjectOrder extends Model
         'email',
         'viewed',
         'project_id',
-        'payment_id',
-        'user_id'
+        'user_id',
+        'gift_id'
     ];
 
     public function type(){
         return $this->belongsTo('App\PaymentType');
     }
-    public function payments(){
-        return $this->hasMany('App\Payment');
+
+    public function user(){
+        return $this->hasMany('App\User','id', 'user_id');
     }
+    public function gift(){
+        return $this->belongsTo('App\ProjectGift', 'gift_id');
+    }
+
+
+    public function project(){
+        return $this->belongsTo('App\Project', 'project_id');
+    }
+
+
+
 }

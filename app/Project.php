@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\Api\V1\Project\Active;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -9,10 +10,17 @@ class Project extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'title',
-        'description',
+        'title_rus',
+        'title_eng',
+        'title_kz',
+        'main_language',
+        'description_rus',
+        'description_kz',
+        'description_eng',
         'deadline',
-        'content',
+        'content_eng',
+        'content_kz',
+        'content_rus',
         'video',
         'goal',
         'gathered',
@@ -67,5 +75,24 @@ class Project extends Model
         return $likes->contains('user_id',$id);
     }
 
+
+//    protected function getArrayableAttributes()
+//    {
+//
+//        foreach ($this->attributes as $key => $value) {
+//            if ($key == 'deleted_at') continue;
+//
+//            if ( is_null($value) ) {
+//                $this->attributes[$key] = '';
+//            }
+//        }
+//
+//        return $this->getArrayableItems($this->attributes);
+//    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new Active());
+    }
 
 }

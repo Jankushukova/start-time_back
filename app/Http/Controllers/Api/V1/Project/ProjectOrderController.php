@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1\Project;
 
+use App\Helpers\CollectionHelper;
+use App\Http\Controllers\API\V1\PaymentController;
 use App\Http\Controllers\Controller;
-use App\Payment;
+use App\ProjectPayment;
 use App\PaymentType;
 use App\Project;
 use App\ProjectOrder;
@@ -32,30 +34,22 @@ class ProjectOrderController extends Controller
      */
 
 
-    public function getUserBakers($id){
-
+    public static function getUserBakers($id){
         return User::all()
             ->whereIn('id',( Project::select(DB::raw('project_orders.user_id'))
             ->join('project_orders', 'projects.id','=','project_orders.project_id')
+            ->where('projects.owner_id', $id)
             ->get()->map(function($item,$key){
                 return $item['user_id'];
             })))->values();
     }
 
-    public function getPaymentsOfProject($id){
-        return Project::findOrFail($id)->payments;
-    }
+//    public function getPaymentsOfProject($id){
+//        return Project::findOrFail($id)->payments;
+//    }
 
-    public function getPaymentsOfProjectOfType($id){
-        return Payment::all()->join('payment_type', 'payment.type_id', '=','payment_type.id')
-            ->join('project_orders', 'project_orders.payment_id','=','payment.id')
-            ->where('payment_type.id', '=', $id);
-    }
-    public function getPaymentsOfProductOfType($id){
-        return Payment::all()->join('payment_type', 'payment.type_id', '=','payment_type.id')
-            ->join('product_orders', 'product_orders.payment_id','=','payment.id')
-            ->where('payment_type.id', '=', $id);
-    }
+
+
 
     public function getUserBakedProjects($id){
         return User::findOrFail($id)->baked;
@@ -71,6 +65,32 @@ class ProjectOrderController extends Controller
         return ProjectOrder::where('project_id',$id);
     }
 
+    public function getAllBakers(Request $request){
+        $bakers = ProjectPayment::with('order', 'bank' )->get()->map(function ($item, $key){
+            $item->order->gift;
+            $item->order->project;
+            return $item;
+        });
+        return CollectionHelper::paginate($bakers, count($bakers), $request->perPage);
+
+//        $users = ProjectOrder::with('user', 'project', 'payment')->get()->values()->map(function ($item, $key){
+
+//            $item->payment->first()->bank;
+//
+//            $item = [
+//                'user' => $item->user->first(),
+//                'payment' => $item->payment->first(),
+//                'project' => $item->project->first(),
+//                'gift' => $bakersGift,
+//            ];
+//            return $item;
+//        });
+//
+//        return CollectionHelper::paginate($users, count($users), $request->perPage);
+
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -80,9 +100,11 @@ class ProjectOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $baker = ProjectOrder::create($request->all());
-        $baker->save();
-        return $baker;
+        error_log($request->gift_id);
+        $order = ProjectOrder::create($request->all());
+        $order->save();
+        $url = PaymentController::basicAuth($order, $request->sum);
+        return response()->json(['url'=>$url], 200);
     }
 
     /**

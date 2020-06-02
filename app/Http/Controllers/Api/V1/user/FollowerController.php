@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\user;
+namespace App\Http\Controllers\API\V1\User;
 
 use App\Follower;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowerController extends Controller
 {
@@ -44,7 +45,7 @@ class FollowerController extends Controller
     {
         $follower = Follower::create($request->all());
         $follower->save();
-        return $follower;
+        return Auth::user();
     }
 
     /**
@@ -92,7 +93,7 @@ class FollowerController extends Controller
      */
     public function destroy($id)
     {
-        $follower = Follower::findOrFail($id);
+        $follower = Follower::whereFollowedId($id)->whereFollowingId(Auth::user()->id);
         $follower->delete();
         return response()->json(['success' => true]);
     }

@@ -15,11 +15,11 @@ class UserTableSeeder extends Seeder
         $admin = new User();
         $admin->fill([
             'password' => '11223344',
-
             'firstname' => 'admin',
             'lastname' => 'admin',
             'phone_number' => '87777777',
             'email' => 'admin@mail.kz',
+            'email_verified_at'=> \Carbon\Carbon::today(),
             'role_id' => 1
         ]);
         $admin->password = bcrypt($admin->password);

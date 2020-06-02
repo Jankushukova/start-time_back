@@ -1,0 +1,8 @@
+MERCHANT_CERTIFICATE_ID = "c183e9f8"				; Серийный номер сертификата Cert Serial Number
+MERCHANT_NAME = "start-time.kz"				; Название магазина (продавца) Shop/merchant Name
+PRIVATE_KEY_FN = "cert.prv"				; Путь к закрытому ключу Private cert path
+PRIVATE_KEY_PASS = "WDfUveEf9i3"					; Пароль к закрытому ключу Private cert password
+XML_TEMPLATE_FN = "template.xml"			; Путь к XML шаблону XML template path
+XML_COMMAND_TEMPLATE_FN = "command_template.xml"	; Путь к XML шаблону для команд (возврат/подтверждение) 
+PUBLIC_KEY_FN = "kkbca.pem"				; Путь к открытому ключу Public cert path
+MERCHANT_ID="98024241"						; Терминал ИД в банковской Системе

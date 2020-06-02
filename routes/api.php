@@ -12,40 +12,45 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-//follower
-
-Route::middleware('auth:web')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('email/verify/{id}', 'VerificationApiController@verify')->name('verificationapi.verify');
+Route::get('email/resend', 'VerificationApiController@resend')->name('verificationapi.resend');
 
 Route::group([
     'prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function ()
 {
     Route::group([], function () {
-        Route::namespace('user')->group(function () {
+            Route::namespace('User')->group(function () {
 
-            //user
-            Route::post('register', 'UsersController@register');//+
-            Route::post('adminLogin', 'UsersController@adminLogin');//+
-            Route::post('userLogin', 'UsersController@authenticate');//+
-            //partners
-            Route::get('users/partners', 'UsersController@getPartners');//+
-            Route::get('users/{id}', 'UsersController@show')->where('id', '[0-9]+');//+
-            //followers
-            Route::get('followers/{id}', 'FollowerController@getFollowers')->where('id', '[0-9]+');//+
-            Route::get('followings/{id}', 'FollowerController@getFollowings')->where('id', '[0-9]+');//+
-            //subscribe
-            Route::post('subscribe', ['uses' => 'SubscribersController@store', 'as' => 'subscribe.store']);//+
-            Route::get('open', 'UsersController@open');
+                Route::get('users/partners', 'UsersController@getPartners');//+
+                Route::get('users/{id}', 'UsersController@show')->where('id', '[0-9]+');//+
+                //followers
+                Route::get('followers/{id}', 'FollowerController@getFollowers')->where('id', '[0-9]+');//+
+                Route::get('followings/{id}', 'FollowerController@getFollowings')->where('id', '[0-9]+');//+
+                //subscribe
+                Route::post('subscribe', ['uses' => 'SubscribersController@store', 'as' => 'subscribe.store']);//+
+                Route::get('open', 'UsersController@open');
 
-        });
+                Route::namespace('Authentication')->group(function () {
+                    Route::post('adminLogin', 'LoginController@authenticateAdmin');//+
+                    Route::post('userLogin', 'LoginController@authenticateUser');//+
+                    Route::post('register', 'RegistrationController@register');//+
+                    Route::post('send/reset/password/link', 'ResetPasswordController@sendEmail');
+                    Route::post('change/password', 'ChangePasswordController@process');
+                    Route::post('auth/facebook', 'SocialAuthController@facebookAuth');
+                    Route::get('redirect', 'SocialAuthController@redirect');
+                    Route::get('callback', 'SocialAuthController@callback');
+
+                    //partners
+                    });
+
+                });
 
         Route::namespace('Project')->group(function () {
             //project category
             Route::get('project/categories', 'ProjectCategoryController@index');//+
 
             //project
-            Route::get('project/category/{id}', ['uses' => 'ProjectsController@getProjectsOfCategory', 'as' => 'category.projects'])->where('id', '[0-9]+');//+
+            Route::get('project/category', ['uses' => 'ProjectsController@getProjectsOfCategory', 'as' => 'category.projects']);//+
             Route::post('project/view/add', ['uses' => 'ProjectsController@addView', 'as' => 'project.view']);//+
             Route::get('project/{id}', ['uses' => 'ProjectsController@show', 'as' => 'project.show'])->where('id', '[0-9]+');//+
             //images
@@ -69,12 +74,15 @@ Route::group([
             Route::get('project/questions/{id}', ['uses' => 'ProjectQuestionController@getQuestionsOfProject', 'as' => 'project.comments'])->where('id', '[0-9]+');//+
 
             //guest user profile
-            Route::get('user/projects/{id}', 'ProjectsController@getUserProjects')->where('id', '[0-9]+');//+
+            Route::get('user/projects', 'ProjectsController@getUserProjects');//+
 
             //statistics
             Route::get('statistics/project', 'ProjectsController@getAmountOfProjects');
             Route::get('statistics/project/successful', 'ProjectsController@getAmountOfSuccessfulProjects');
             Route::get('statistics/project/bakers', 'ProjectsController@getAmountOfBakers');
+
+            //order
+            Route::post('project/orders', ['uses' => 'ProjectOrderController@store', 'as' => 'order.store']);//+
 
 
         });
@@ -84,7 +92,7 @@ Route::group([
 
         Route::namespace('news')->group(function () {
             //news
-            Route::get('news', 'NewsController@index')->where('id', '[0-9]+');//+
+            Route::get('news/all', 'NewsController@index')->where('id', '[0-9]+');//+
             Route::get('news/{id}', 'NewsController@show');//+
             Route::post('news/view/add', ['uses' => 'NewsController@addView', 'as' => 'news.view']);//+
 
@@ -100,7 +108,7 @@ Route::group([
 
         Route::namespace('product')->group(function () {
             //shop
-            Route::get('product', ['uses' => 'ProductController@index', 'as' => 'products.index']);//+
+            Route::get('products', ['uses' => 'ProductController@index', 'as' => 'products.index']);//+
             Route::get('product/show/{id}', ['uses' => 'ProductController@show', 'as' => 'products.show'])->where('id', '[0-9]+');//+
             Route::get('product/images/{id}', ['uses' => 'ProductImageController@getImages', 'as' => 'product.images'])->where('id', '[0-9]+');//+
             Route::post('product/view/add', ['uses' => 'ProductController@addView', 'as' => 'product.view']);//+
@@ -110,30 +118,33 @@ Route::group([
         });
 
         //general
-        Route::post('payment', ['uses' => 'PaymentController@store', 'as' => 'payment.store']);//+
+//        Route::post('payment', ['uses' => 'PaymentController@store', 'as' => 'payment.store']);//+
         Route::get('comment/likes/{id}', ['uses' => 'CommentLikeController@getLikesOfComment', 'as' => 'comment.likes'])->where('id', '[0-9]+');//+
 
 
-        Route::group(['middleware' => ['jwt.verify']], function() {
+        Route::get('payment/basic/auth', 'PaymentController@basicAuth');//+
+        Route::get('payment/success', 'PaymentController@success');//+
+        Route::get('payment/fail', 'PaymentController@failure');//+
+        Route::get('payment/check', 'PaymentController@checkPay');//+
+        Route::get('payment/control', 'PaymentController@controlPay');//+
+
+        Route::group(['middleware' => ['jwt.verify', 'verified']], function() {
 
             Route::namespace('Project')->group(function () {
                 //authenticated user profile
                 Route::get('user/bakers/{id}', 'ProjectOrderController@getUserBakers')->where('id', '[0-9]+');//+
                 Route::get('projects/user/baked/{id}', 'ProjectOrderController@getUserBakedProjects')->where('id', '[0-9]+');//+
 
-                //?? Route::get('user/recommendations', 'ProjectCategoryController@index');
 
 
                 // project
                 Route::post('project', ['uses' => 'ProjectsController@store', 'as' => 'projects.store']);//+
                 Route::post('project/create/images', ['uses' => 'ProjectImagesController@store', 'as' => 'images.store']);//+
-                Route::post('project/orders', ['uses' => 'ProjectOrderController@store', 'as' => 'order.store']);//+
                 //gift
                 Route::post('gifts', ['uses' => 'ProjectGiftsController@store', 'as' => 'gifts.store']);//+
                 Route::put('gifts', ['uses' => 'ProjectGiftsController@update', 'as' => 'gifts.update']);//+
                 Route::delete('gifts', ['uses' => 'ProjectGiftsController@destroy', 'as' => 'gifts.destroy']);//+
                 //comments
-                Route::get('project/comment/{id}', ['uses' => 'ProjectCommentsController@getCommentsOfProjectAuth', 'as' => 'project.comments'])->where('id', '[0-9]+');//+
                 Route::post('project/comment', ['uses' => 'ProjectCommentsController@store', 'as' => 'projects.store']);//+
                 Route::delete('project/comment/{id}', ['uses' => 'ProjectCommentsController@destroy', 'as' => 'projects.destroy'])->where('id', '[0-9]+');//+
                 //updates
@@ -176,6 +187,7 @@ Route::group([
                 // user
                 Route::get('user', 'UsersController@getAuthenticatedUser');//+
                 Route::get('users/profile/information', 'UsersController@UserProfileInformation');//+
+                Route::get('users/recommendations', 'UsersController@userRecommendations');
 
                 //follower
                 Route::post('followers', ['uses' => 'FollowerController@store', 'as' => 'followers.store']);//+
@@ -195,13 +207,18 @@ Route::group([
             Route::group(['middleware' => ['admin']], function() {
                 Route::namespace('Project')->group(function () {
                     //project-category
+                    Route::get('project/category/all', ['uses' => 'ProjectCategoryController@getAllCategories', 'as' => 'projects.AllCategories']);//+
                     Route::post('project/category/create', ['uses' => 'ProjectCategoryController@store', 'as' => 'projects.store']);//+
                     Route::delete('project/category/delete/{id}', ['uses' => 'ProjectCategoryController@destroy', 'as' => 'projects.destroy'])->where('id', '[0-9]+');//+
                     Route::put('project/category/update/{id}', ['uses' => 'ProjectCategoryController@update', 'as' => 'projects.update'])->where('id', '[0-9]+');//+
 
                     // project
+                    Route::get('project', ['uses' => 'ProjectsController@index', 'as' => 'projects.index'])->where('id', '[0-9]+');//+
                     Route::delete('project/{id}', ['uses' => 'ProjectsController@destroy', 'as' => 'projects.store'])->where('id', '[0-9]+');//+
                     Route::put('project/{id}', ['uses' => 'ProjectsController@update', 'as' => 'projects.update'])->where('id', '[0-9]+');//+
+
+                    //bakers
+                    Route::get('project/bakers/all', ['uses' => 'ProjectOrderController@getAllBakers', 'as' => 'projects.bakers']);//+
 
                     //orders
                     Route::get('project/payments/{id}', ['uses' => 'ProjectOrderController@getPaymentsOfProject', 'as' => 'project.payments'])->where('id', '[0-9]+');//+
@@ -215,6 +232,7 @@ Route::group([
 
                 Route::namespace('product')->group(function () {
                     // products
+                    Route::get('product/all', ['uses' => 'ProductController@getAllProducts', 'as' => 'product.index'])->where('id', '[0-9]+');//+
                     Route::delete('product/{id}', ['uses' => 'ProductController@destroy', 'as' => 'product.store'])->where('id', '[0-9]+');//+
                     Route::put('product/{id}', ['uses' => 'ProductController@update', 'as' => 'product.update'])->where('id', '[0-9]+');//+
 

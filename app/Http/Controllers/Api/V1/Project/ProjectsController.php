@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Project;
 
+use App\Helpers\CollectionHelper;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\ProjectCategory;
@@ -45,25 +46,30 @@ class ProjectsController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return Project::all();
+        $projects = Project::with('user')->get();
+        return CollectionHelper::paginate($projects, count($projects), $request->perPage);
+
     }
+
+
 
     public function getMostPopular(){
         $ids = [];
         $projects =  Project::all()
         ->whereIn('id', ((Project::select(DB::raw('projects.id, COUNT(project_likes.id) as like_count'))
-            ->leftJoin('project_likes','project_likes.project_id','=','projects.id')
+            ->join('project_likes','project_likes.project_id','=','projects.id')
             ->groupBy('projects.id')
             ->orderBy('like_count', 'desc')
-            ->take(5)
+            ->take(6)
             ->get())->map(function ($item, $key) {
             return $item['id'];
         })))->where('active','=','1')->values();
 
         $projects = $projects->map(function ($item, $key){
-            $item->images = this->setImagePath($item->images);
+            $item->images = $this->setImagePath($item->images);
+            $item->likes;
             $item->user;
             return $item;
         });
@@ -72,13 +78,13 @@ class ProjectsController extends Controller
 
 
     }
-    
+
     public function setImagePath($images){
         return $images->map(function($item, $key){
             $item->image = asset($item->image);
             return $item;
         });
-    
+
     }
 
 
@@ -100,38 +106,38 @@ class ProjectsController extends Controller
     }
 
 
-    public function getUserProjects($id){
-        return User::findOrFail($id)->projects->map(function($item, $key){
-            $item->likes;
-            $item->images = this->setImagePath($item->images);
-            $item->bakers;
-            try {
-                $user = JWTAuth::parseToken()->authenticate();
-                $item['liked'] = $item->liked($user->id);
+    public function getUserProjects(Request $request){
+        $projects = Project::whereOwnerId($request->id)->where('active', 1)->with('likes', 'images', 'bakers')
+            ->get()
+            ->map(function($item, $key){
+                try {
+                    $user = JWTAuth::parseToken()->authenticate();
+                    $item['liked'] = $item->liked($user->id);
 
-            } catch (JWTException $e) {
-            }
-            return $item;
-        });
+                } catch (JWTException $e) {
+                }
+                return $item;
+            });
+
+        return CollectionHelper::paginate($projects, count($projects), $request->perPage);
     }
 
-    public function getProjectsOfCategory($id)
+    public function getProjectsOfCategory(Request $request)
     {
-        $projects = ProjectCategory::findOrFail($id)->projects->where('active','=','1');
-        $projects = $projects->map(function ($item, $key){
-            $item->images = this->setImagePath($item->images);
-            $item->likes;
-            try {
-                $user = JWTAuth::parseToken()->authenticate();
-                $item['liked'] = $item->liked($user->id);
+        $projects = Project::whereCategoryId($request->category_id)
+            ->where('active', 1)
+            ->with('likes','images','user')
+            ->get()
+            ->map(function ($item,$key){
+                try {
+                    $user = JWTAuth::parseToken()->authenticate();
+                    $item['liked'] = $item->liked($user->id);
 
-            } catch (JWTException $e) {
-            }
-
-            $item->user;
-            return $item;
-        });
-        return $projects;
+                } catch (JWTException $e) {
+                }
+                return $item;
+            });
+        return CollectionHelper::paginate($projects, count($projects), $request->perPage);
     }
 
     /**
@@ -159,22 +165,17 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        $project = Project::findorFail($id);
-        $project->images = this->setImagePath($project->images);
-        $project->user;
-        $project->comments;
-        $project->updates->map(function($item,$key){
-            $item->images;
-            return $item;
-        });
-        $project->questions;
-        $project->likes;
+        $project = Project::whereId($id)->with('images', 'user', 'comments', 'questions', 'likes', 'updates', 'gifts')->first();
         try {
             $user = JWTAuth::parseToken()->authenticate();
             $project['liked'] = $project->liked($user->id);
 
         } catch (JWTException $e) {
         }
+        $project->updates->map(function($item,$key){
+            $item->images;
+            return $item;
+        });
         $backersCount = Project::select(DB::raw('projects.id'))
             ->join('project_orders', 'project_orders.project_id','=','projects.id')
             ->where('projects.id','=',$project->id)->count();

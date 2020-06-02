@@ -12,4 +12,8 @@ class NewsImage extends Model
         'image',
         'news_id'
     ];
+    public function getImageAttribute($key)
+    {
+        return asset($key);
+    }
 }

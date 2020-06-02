@@ -16,7 +16,7 @@ class CreateUpdatesTable extends Migration
         Schema::create('updates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->softDeletes();
             $table->timestamps();
         });

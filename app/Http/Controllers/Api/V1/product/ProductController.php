@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\product;
+namespace App\Http\Controllers\API\V1\Product;
 
+use App\Helpers\CollectionHelper;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
@@ -17,11 +18,9 @@ class ProductController extends Controller
         $product->save();
         return $product;
     }
-    public function index()
+    public function index(Request $request)
     {
-        return Product::all()->map(function($item, $key){
-            $item->images;
-            $item->likes;
+        $products = Product::with('images','likes')->whereActive(1)->get()->map(function($item, $key){
             try {
                 $user = JWTAuth::parseToken()->authenticate();
                 $item['liked'] = $item->liked($user->id);
@@ -30,7 +29,19 @@ class ProductController extends Controller
             }
             return $item;
         });
+        return CollectionHelper::paginate($products, count($products), $request->perPage);
+
     }
+
+    public function getAllProducts(Request $request){
+        $products = Product::with('user', 'project')->get()->map(function ($item, $key){
+            $item->project->category;
+            return $item;
+        });
+        return CollectionHelper::paginate($products, count($products), $request->perPage);
+
+    }
+
 
     public function getMostPopular(){
         $ids = [];
@@ -39,6 +50,7 @@ class ProductController extends Controller
                 ->leftJoin('product_likes','product_likes.product_id','=','products.id')
                 ->groupBy('products.id')
                 ->orderBy('like_count', 'desc')
+                ->where('products.active', 1)
                 ->take(8)
                 ->get())->map(function ($item, $key) {
                 return $item['id'];

@@ -16,6 +16,15 @@ class Product extends Model
 
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('App\User','owner_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Project','project_id');
+    }
     public function likes(){
         return $this->hasMany('App\ProductLike');
     }

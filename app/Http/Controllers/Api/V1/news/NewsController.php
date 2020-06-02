@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\news;
+namespace App\Http\Controllers\API\V1\News;
 
+use App\Helpers\CollectionHelper;
 use App\Http\Controllers\Controller;
 use App\News;
 use Illuminate\Http\Request;
@@ -18,19 +19,19 @@ class NewsController extends Controller
         return $news;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return News::all()->map(function($item, $key){
-            $item->likes;
-            $item->images;
+        $news =  News::with('likes', 'images')->get()->map(function($item, $key){
             try {
                 $user = JWTAuth::parseToken()->authenticate();
                 $item['liked'] = $item->liked($user->id);
-
             } catch (JWTException $e) {
             }
             return $item;
         });
+
+        return CollectionHelper::paginate($news, count($news), $request->perPage);
+
     }
 
 

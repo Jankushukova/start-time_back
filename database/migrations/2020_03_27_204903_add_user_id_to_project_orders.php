@@ -14,7 +14,7 @@ class AddUserIdToProjectOrders extends Migration
     public function up()
     {
         Schema::table('project_orders', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id','fk_orders_user')
                 ->references('id')
                 ->on('users');

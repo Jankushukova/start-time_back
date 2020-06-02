@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Project;
 
+use App\Helpers\CollectionHelper;
 use App\Http\Controllers\Controller;
 use App\ProjectCategory;
 use Illuminate\Http\Request;
@@ -11,6 +12,11 @@ class ProjectCategoryController extends Controller
 {
     public function __construct()
     {
+    }
+    public function getAllCategories(Request $request){
+        $categories = ProjectCategory::with('projects')->get();
+        return CollectionHelper::paginate($categories, count($categories), $request->perPage);
+
     }
 
     public function index()

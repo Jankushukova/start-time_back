@@ -2,13 +2,15 @@
 
 namespace App;
 
+use App\Notifications\VerifyApiEmail;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use Notifiable;
     use SoftDeletes;
@@ -26,6 +28,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'role_id'=>Role::UNAUTHORIZED_CLIENT_ID,
         'password',
+        'provider',
+        'provider_id'
     ];
 
     /**
@@ -85,20 +89,32 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function followers(){
-        return $this->belongsToMany('App\User', 'followers', 'following_id', 'follower_id');
+        return $this->belongsToMany('App\User', 'followers', 'followed_id', 'following_id')->whereNull('followers.deleted_at');
     }
 
     public function followings(){
-        return $this->belongsToMany('App\User', 'followers', 'follower_id', 'following_id');
+        return $this->belongsToMany('App\User', 'followers', 'following_id', 'followed_id')->whereNull('followers.deleted_at');
     }
 
     public function baked(){
         return $this->belongsToMany('App\Project', 'project_orders', 'user_id', 'project_id');
     }
-    public function payments(){
-        return $this->belongsToMany('App\Payment', 'project_orders', 'user_id', 'payment_id');
 
+    public function payments(){
+        return $this->belongsToMany('App\ProjectPayment', 'project_orders', 'user_id', 'payment_id');
     }
+
+    public function sendApiEmailVerificationNotification()
+    {
+        $this->notify(new VerifyApiEmail()); // my notification
+    }
+
+    public function getImageAttribute($key)
+    {
+        return asset($key);
+    }
+
+
 
 
 }

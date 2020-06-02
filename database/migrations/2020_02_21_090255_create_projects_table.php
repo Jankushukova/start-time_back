@@ -15,10 +15,17 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('description');
+            $table->string('title_rus');
+            $table->string('title_eng');
+            $table->string('title_kz');
+            $table->string('main_language')->default('rus');
+            $table->text('description_rus');
+            $table->text('description_kz');
+            $table->text('description_eng');
             $table->timestamp('deadline');
-            $table->string('content');
+            $table->text('content_rus');
+            $table->text('content_kz');
+            $table->text('content_eng');
             $table->string('video');
             $table->string('goal');
             $table->integer('views')->default(0);

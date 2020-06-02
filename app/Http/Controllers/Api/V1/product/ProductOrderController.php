@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\product;
+namespace App\Http\Controllers\API\V1\Product;
 
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -19,7 +19,7 @@ class ProductOrderController extends Controller
     }
 
     public function getPaymentsOfProduct($id){
-        return Product::findOrFail($id)->payments;
+        return Product::findOrFail($id);
     }
 
     /**

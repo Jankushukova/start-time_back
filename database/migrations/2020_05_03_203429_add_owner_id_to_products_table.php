@@ -17,7 +17,7 @@ class AddOwnerIdToProductsTable extends Migration
             $table->bigInteger('owner_id')->unsigned();
             $table->foreign('owner_id','fk_product_owner')
                 ->references('id')
-                ->on('products');
+                ->on('users');
         });
     }
 

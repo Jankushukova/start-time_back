@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\news;
+namespace App\Http\Controllers\API\V1\News;
 
 use App\Http\Controllers\Controller;
 use App\NewsImage;

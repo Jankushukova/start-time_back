@@ -7,6 +7,7 @@ use App\Project;
 use App\ProjectComment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProjectCommentsController extends Controller
@@ -18,7 +19,19 @@ class ProjectCommentsController extends Controller
 
     public function getCommentsOfProject($id)
     {
-        return Project::findOrFail($id)->comments;
+        return Project::findOrFail($id)->comments->map(function($item,$key){
+            $item['likes'] = ProjectComment::findOrFail($item->id)->likes->map(function ($item,$key){
+                return $item['id'];
+            });
+            $item->user;
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+                $item['liked'] = $item->liked($user->id);
+
+            } catch (JWTException $e) {
+            }
+            return $item;
+        });
     }
 
     /**
@@ -26,17 +39,7 @@ class ProjectCommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCommentsOfProjectAuth($id)
-    {
-        return Project::findOrFail($id)->comments->map(function($item,$key){
-            $item['likes'] = ProjectComment::findOrFail($item->id)->likes->map(function ($item,$key){
-                return $item['id'];
-            });
-            $item->user;
-            $item['liked'] = $item->liked(JWTAuth::parseToken()->authenticate()->id);
-            return $item;
-        });
-    }
+
 
 
 

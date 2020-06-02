@@ -15,7 +15,7 @@ class CreateNewsCommentsTable extends Migration
     {
         Schema::create('news_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('description');
+            $table->text('description');
             $table->boolean('viewed')->default(false);
             $table->timestamps();
             $table->softDeletes();
