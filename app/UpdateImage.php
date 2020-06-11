@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UpdateImage extends Model
 {
+    const PATH = 'images/update';
     use SoftDeletes;
     protected $fillable = [
         'image',

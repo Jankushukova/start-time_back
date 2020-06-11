@@ -15,8 +15,9 @@ class CreateProjectOrdersTable extends Migration
     {
         Schema::create('project_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('confirmed')->default(false);
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->boolean('viewed')->default(false);

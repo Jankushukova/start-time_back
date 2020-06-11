@@ -17,7 +17,6 @@ class CreateNewsImagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('image');
             $table->timestamps();
-            $table->softDeletes();
 
         });
     }

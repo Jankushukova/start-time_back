@@ -16,7 +16,7 @@ class CreateProjectPaymentsTable extends Migration
         Schema::create('project_payments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('sum');
-            $table->boolean('viewed');
+            $table->boolean('viewed')->default(false);
             $table->integer('category');
             $table->softDeletes();
             $table->timestamps();

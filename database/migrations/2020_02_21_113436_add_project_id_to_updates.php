@@ -13,7 +13,7 @@ class AddProjectIdToUpdates extends Migration
      */
     public function up()
     {
-        Schema::table('updates', function (Blueprint $table) {
+        Schema::table('update', function (Blueprint $table) {
             $table->bigInteger('project_id')->unsigned();
             $table->foreign('project_id','fk_updates_projects')
                 ->references('id')
@@ -28,7 +28,7 @@ class AddProjectIdToUpdates extends Migration
      */
     public function down()
     {
-        Schema::table('updates', function (Blueprint $table) {
+        Schema::table('update', function (Blueprint $table) {
             $table->dropForeign('fk_updates_projects');
             $table->dropColumn('project_id');
         });

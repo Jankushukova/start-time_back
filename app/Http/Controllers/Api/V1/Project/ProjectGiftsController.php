@@ -73,11 +73,14 @@ class ProjectGiftsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $gift = ProjectGift::findorFail($id);
-        $gift->update($request->all());
-        return $gift;
+        foreach ($request->all() as $updatedGift){
+            $gift = ProjectGift::create($updatedGift);
+            $gift->save();
+        }
+
+        return response()->json(['success' => true], 200);
     }
 
     /**

@@ -34,9 +34,39 @@ class NewsImagesController extends Controller
      */
     public function store(Request $request)
     {
-        $image = NewsImage::create($request->all());
-        $image->save();
-        return $image;
+        $images = [];
+        error_log('store');
+        $i = 1;
+        error_log($request->has('image'.$i));
+        while ($request->has('image'.$i))
+        {
+            $image = new NewsImage();
+            if($request->file('image'.$i)){
+                error_log('new img');
+                $file = $request->file('image'.$i);
+                error_log($file);
+                $filename  = $file->getClientOriginalName();
+                error_log($filename);
+                $picture   = date('His').'-'.$filename;
+                $file->move(public_path(NewsImage::PATH), $picture);
+                $image->image = NewsImage::PATH.'/'.$picture;
+                error_log($image->image);
+            }
+            else{
+                error_log('old img');
+                $image->image = str_replace(asset('/'), '' , $request->get('image'.$i));
+            }
+            $i++;
+            if($request->has('news_id')){
+                $image->news_id = $request->get('news_id');
+                $image->save();
+                array_push($images, $image);
+            }
+            else{
+                return response()->json(["error" => "Select image first."]);
+            }
+        }
+        return $images;
     }
 
     /**

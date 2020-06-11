@@ -53,6 +53,7 @@ Route::group([
             Route::get('project/category', ['uses' => 'ProjectsController@getProjectsOfCategory', 'as' => 'category.projects']);//+
             Route::post('project/view/add', ['uses' => 'ProjectsController@addView', 'as' => 'project.view']);//+
             Route::get('project/{id}', ['uses' => 'ProjectsController@show', 'as' => 'project.show'])->where('id', '[0-9]+');//+
+            Route::get('project/user/{id}', ['uses' => 'ProjectsController@showOwnerOfProject', 'as' => 'project.show'])->where('id', '[0-9]+');//+
             //images
             Route::get('project/images/{id}', ['uses' => 'ProjectImagesController@getImagesOfProject', 'as' => 'project.images'])->where('id', '[0-9]+');//+
             //bakers
@@ -64,10 +65,10 @@ Route::group([
             //gifts
             Route::get('project/gifts/{id}', ['uses' => 'ProjectGiftsController@getGiftsOfProject', 'as' => 'project.gifts'])->where('id', '[0-9]+');//+
             Route::get('gift/{id}', ['uses' => 'ProjectGiftsController@show', 'as' => 'gifts.show'])->where('id', '[0-9]+');//+
-            //updates
-            Route::get('project/updates/{id}', ['uses' => 'UpdatesController@getUpdatesOfProject', 'as' => 'project.updates'])->where('id', '[0-9]+');//+
-            Route::get('updates/images/{id}', ['uses' => 'UpdatesController@getUpdatesImages', 'as' => 'updates.images'])->where('id', '[0-9]+');//+
-            Route::get('update/{id}', ['uses' => 'UpdatesController@show', 'as' => 'updates.show'])->where('id', '[0-9]+');//+
+            //update
+            Route::get('project/updates/{id}', ['uses' => 'UpdatesController@getUpdatesOfProject', 'as' => 'project.update'])->where('id', '[0-9]+');//+
+            Route::get('update/images/{id}', ['uses' => 'UpdatesController@getUpdatesImages', 'as' => 'update.images'])->where('id', '[0-9]+');//+
+            Route::get('update/{id}', ['uses' => 'UpdatesController@show', 'as' => 'update.show'])->where('id', '[0-9]+');//+
             //most popular
             Route::get('project/popular', ['uses' => 'ProjectsController@getMostPopular', 'as' => 'projects.popular']);//+
             //questions
@@ -82,7 +83,10 @@ Route::group([
             Route::get('statistics/project/bakers', 'ProjectsController@getAmountOfBakers');
 
             //order
-            Route::post('project/orders', ['uses' => 'ProjectOrderController@store', 'as' => 'order.store']);//+
+            Route::post('project/orders/create', ['uses' => 'ProjectOrderController@store', 'as' => 'order.store']);//+
+            Route::post('project/orders/epay/create', ['uses' => 'ProjectOrderController@storeEpay', 'as' => 'order.store']);//+
+            Route::post('project/orders/cloud/success', 'ProjectOrderController@cloudSuccess');//+
+            Route::post('project/orders/cloud/failure', 'ProjectOrderController@cloudFailure');//+
 
 
         });
@@ -122,11 +126,12 @@ Route::group([
         Route::get('comment/likes/{id}', ['uses' => 'CommentLikeController@getLikesOfComment', 'as' => 'comment.likes'])->where('id', '[0-9]+');//+
 
 
-        Route::get('payment/basic/auth', 'PaymentController@basicAuth');//+
-        Route::get('payment/success', 'PaymentController@success');//+
-        Route::get('payment/fail', 'PaymentController@failure');//+
-        Route::get('payment/check', 'PaymentController@checkPay');//+
-        Route::get('payment/control', 'PaymentController@controlPay');//+
+        Route::get('payment/epay/basic/auth', 'PaymentController@epayBasicAuth');//+
+        Route::get('payment/epay/success', 'PaymentController@epaySuccess');//+
+        Route::get('payment/epay/fail', 'PaymentController@epayFailure');//+
+        Route::get('payment/epay/check', 'PaymentController@checkPay');//+
+        Route::get('payment/epay/control', 'PaymentController@controlPay');//+
+        Route::get('payment/epay/control', 'PaymentController@controlPay');//+
 
         Route::group(['middleware' => ['jwt.verify', 'verified']], function() {
 
@@ -134,12 +139,16 @@ Route::group([
                 //authenticated user profile
                 Route::get('user/bakers/{id}', 'ProjectOrderController@getUserBakers')->where('id', '[0-9]+');//+
                 Route::get('projects/user/baked/{id}', 'ProjectOrderController@getUserBakedProjects')->where('id', '[0-9]+');//+
+                Route::get('user/projects/active', 'ProjectsController@getUserActiveProjects');//+
+                Route::get('user/projects/unactive', 'ProjectsController@getUserUnActiveProjects');//+
 
 
 
                 // project
                 Route::post('project', ['uses' => 'ProjectsController@store', 'as' => 'projects.store']);//+
                 Route::post('project/create/images', ['uses' => 'ProjectImagesController@store', 'as' => 'images.store']);//+
+                Route::put('project/{id}', ['uses' => 'ProjectsController@update', 'as' => 'projects.update'])->where('id', '[0-9]+');//+
+                Route::post('project/order/download/excel', ['uses' => 'ProjectOrderController@export', 'as' => 'projects.bakers']);//+
                 //gift
                 Route::post('gifts', ['uses' => 'ProjectGiftsController@store', 'as' => 'gifts.store']);//+
                 Route::put('gifts', ['uses' => 'ProjectGiftsController@update', 'as' => 'gifts.update']);//+
@@ -147,13 +156,17 @@ Route::group([
                 //comments
                 Route::post('project/comment', ['uses' => 'ProjectCommentsController@store', 'as' => 'projects.store']);//+
                 Route::delete('project/comment/{id}', ['uses' => 'ProjectCommentsController@destroy', 'as' => 'projects.destroy'])->where('id', '[0-9]+');//+
-                //updates
-                Route::post('update', ['uses' => 'UpdateController@store', 'as' => 'update.store']);//+
+                //update
+                Route::post('update', ['uses' => 'UpdatesController@store', 'as' => 'update.store']);//+
+                Route::post('update/create/images', ['uses' => 'UpdatesController@storeImage', 'as' => 'images.store']);//+
+                Route::delete('update/{id}', ['uses' => 'UpdatesController@destroy', 'as' => 'update.destroy'])->where('id', '[0-9]+');//+
+
                 //likes
                 Route::post('project/like', ['uses' => 'ProjectLikesController@store', 'as' => 'projects.store']);//+
                 Route::delete('project/like/{id}', ['uses' => 'ProjectLikesController@destroy', 'as' => 'projects.destroy'])->where('id', '[0-9]+');//+
                 //questions
                 Route::post('project/questions', ['uses' => 'ProjectQuestionController@store', 'as' => 'questions.store']);//+
+                Route::put('project/questions/{id}', ['uses' => 'ProjectQuestionController@update', 'as' => 'questions.update']);//+
                 Route::delete('project/questions/{id}', ['uses' => 'ProjectQuestionController@destroy', 'as' => 'questions.destroy'])->where('id', '[0-9]+');//+
 
 
@@ -188,6 +201,8 @@ Route::group([
                 Route::get('user', 'UsersController@getAuthenticatedUser');//+
                 Route::get('users/profile/information', 'UsersController@UserProfileInformation');//+
                 Route::get('users/recommendations', 'UsersController@userRecommendations');
+                Route::put('users/update', 'UsersController@update');//+
+                Route::put('users/update/admin', 'UsersController@updateAdmin');//+
 
                 //follower
                 Route::post('followers', ['uses' => 'FollowerController@store', 'as' => 'followers.store']);//+
@@ -208,25 +223,28 @@ Route::group([
                 Route::namespace('Project')->group(function () {
                     //project-category
                     Route::get('project/category/all', ['uses' => 'ProjectCategoryController@getAllCategories', 'as' => 'projects.AllCategories']);//+
+                    Route::get('project/category/{id}', ['uses' => 'ProjectCategoryController@show', 'as' => 'projects.show']);//+
                     Route::post('project/category/create', ['uses' => 'ProjectCategoryController@store', 'as' => 'projects.store']);//+
                     Route::delete('project/category/delete/{id}', ['uses' => 'ProjectCategoryController@destroy', 'as' => 'projects.destroy'])->where('id', '[0-9]+');//+
                     Route::put('project/category/update/{id}', ['uses' => 'ProjectCategoryController@update', 'as' => 'projects.update'])->where('id', '[0-9]+');//+
 
                     // project
-                    Route::get('project', ['uses' => 'ProjectsController@index', 'as' => 'projects.index'])->where('id', '[0-9]+');//+
+                    Route::get('project/all', ['uses' => 'ProjectsController@index', 'as' => 'projects.index'])->where('id', '[0-9]+');//+
+                    Route::get('project/filter', ['uses' => 'ProjectsController@filter', 'as' => 'projects.index'])->where('id', '[0-9]+');//+
                     Route::delete('project/{id}', ['uses' => 'ProjectsController@destroy', 'as' => 'projects.store'])->where('id', '[0-9]+');//+
-                    Route::put('project/{id}', ['uses' => 'ProjectsController@update', 'as' => 'projects.update'])->where('id', '[0-9]+');//+
+                    Route::put('project/change/state', ['uses' => 'ProjectsController@changeState', 'as' => 'projects.state'])->where('id', '[0-9]+');//+
 
                     //bakers
                     Route::get('project/bakers/all', ['uses' => 'ProjectOrderController@getAllBakers', 'as' => 'projects.bakers']);//+
+                    Route::get('project/bakers/filter', ['uses' => 'ProjectOrderController@filterAllBakers', 'as' => 'projects.bakers']);//+
+                    Route::get('project/bakers/bank', ['uses' => 'ProjectOrderController@getOrdersOfBank', 'as' => 'projects.bakers']);//+
 
                     //orders
                     Route::get('project/payments/{id}', ['uses' => 'ProjectOrderController@getPaymentsOfProject', 'as' => 'project.payments'])->where('id', '[0-9]+');//+
                     Route::get('project/type/payments/{id}', ['uses' => 'ProjectOrderController@getPaymentsOfProjectOfType', 'as' => 'type.payments'])->where('id', '[0-9]+');//+
 
-                    //updates
+                    //update
                     Route::put('update', ['uses' => 'UpdateController@update', 'as' => 'update.update'])->where('id', '[0-9]+');//+
-                    Route::delete('update', ['uses' => 'UpdateController@destroy', 'as' => 'update.destroy'])->where('id', '[0-9]+');//+
 
                 });
 
@@ -252,15 +270,21 @@ Route::group([
                 Route::namespace('news')->group(function () {
                     //news
                     Route::post('news', ['uses' => 'NewsController@store', 'as' => 'news.store']);//+
+                    Route::post('news/create/images', ['uses' => 'NewsImagesController@store', 'as' => 'news.store']);//+
                     Route::put('news/{id}', ['uses' => 'NewsController@update', 'as' => 'news.update'])->where('id', '[0-9]+');//+
                     Route::delete('news/{id}', ['uses' => 'NewsController@destroy', 'as' => 'news.destroy'])->where('id', '[0-9]+');//+
 
                 });
 
                 Route::namespace('user')->group(function () {
+                    Route::get('users/all', 'UsersController@index');//+
+                    Route::get('users/filter', 'UsersController@filter');//+
+
                     //subscribe
-                    Route::get('subscribe', ['uses' => 'SubscribersController@index', 'as' => 'subscribers.index']);//+
+                    Route::get('subscribe/all', ['uses' => 'SubscribersController@index', 'as' => 'subscribers.index']);//+
+                    Route::get('subscribe/filter', ['uses' => 'SubscribersController@filter', 'as' => 'subscribers.index']);//+
                     Route::put('subscribe/{id}', ['uses' => 'SubscribersController@update', 'as' => 'subscribers.update'])->where('id', '[0-9]+');//+
+                    Route::put('subscribe/status/change', ['uses' => 'SubscribersController@changeStatus', 'as' => 'subscribers.update'])->where('id', '[0-9]+');//+
                     Route::delete('subscribe/{id}', ['uses' => 'SubscribersController@destroy', 'as' => 'subscribers.destroy'])->where('id', '[0-9]+');//+
 
                 });

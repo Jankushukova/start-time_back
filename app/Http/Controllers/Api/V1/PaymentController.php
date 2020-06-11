@@ -14,7 +14,7 @@ use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class PaymentController extends Controller
 {
-    public static function basicAuth($order, $sum){
+    public static function epayBasicAuth($order, $sum){
         $pay =  Epay::basicAuth([
             'order_id' => $order->id,
             'currency' => '398',
@@ -50,11 +50,21 @@ class PaymentController extends Controller
         return $response;
     }
 
-    public function success(Request $request){
+    public function epaySuccess(Request $request){
         error_log('success');
     }
 
-    public function failure(Request $request){
+    public function epayFailure(Request $request){
+        error_log("failed payment");
+    }
+
+    public function cloudSuccess(Request $request){
+        error_log('cloud');
+        error_log('success');
+    }
+
+    public function cloudFailure(Request $request){
+        error_log("cloud payment");
         error_log("failed payment");
     }
 

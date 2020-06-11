@@ -36563,7 +36563,7 @@ var Defaults = {
   /**
    * Callback called when the popper is updated. This callback is not called
    * on the initialization/creation of the popper, but only on subsequent
-   * updates.<br />
+   * update.<br />
    * By default, it is set to no-op.<br />
    * Access Popper.js instance with `data.instance`.
    * @prop {onUpdate}
@@ -41027,7 +41027,7 @@ var config = ({
   mustUseProp: no,
 
   /**
-   * Perform updates asynchronously. Intended to be used by Vue Test Utils
+   * Perform update asynchronously. Intended to be used by Vue Test Utils
    * This will significantly reduce performance if set to false.
    */
   async: true,
@@ -41481,7 +41481,7 @@ function toggleObserving (value) {
  * Observer class that is attached to each observed
  * object. Once attached, the observer converts the target
  * object's property keys into getter/setters that
- * collect dependencies and dispatch updates.
+ * collect dependencies and dispatch update.
  */
 var Observer = function Observer (value) {
   this.value = value;
@@ -43712,7 +43712,7 @@ var componentVNodeHooks = {
     if (vnode.data.keepAlive) {
       if (context._isMounted) {
         // vue-router#1212
-        // During updates, a kept-alive component's child components may
+        // During update, a kept-alive component's child components may
         // change, so directly walking the tree here may call activated hooks
         // on incorrect children. Instead we push them into a queue which will
         // be processed after the whole patch process ended.
@@ -44503,7 +44503,7 @@ function lifecycleMixin (Vue) {
       // initial render
       vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */);
     } else {
-      // updates
+      // update
       vm.$el = vm.__patch__(prevVnode, vnode);
     }
     restoreActiveInstance();
@@ -44867,7 +44867,7 @@ function flushSchedulerQueue () {
     id = watcher.id;
     has[id] = null;
     watcher.run();
-    // in dev build, check and stop circular updates.
+    // in dev build, check and stop circular update.
     if (has[id] != null) {
       circular[id] = (circular[id] || 0) + 1;
       if (circular[id] > MAX_UPDATE_COUNT) {
@@ -45209,7 +45209,7 @@ function initState (vm) {
 function initProps (vm, propsOptions) {
   var propsData = vm.$options.propsData || {};
   var props = vm._props = {};
-  // cache prop keys so that future props updates can iterate using Array
+  // cache prop keys so that future props update can iterate using Array
   // instead of dynamic object key enumeration.
   var keys = vm.$options._propKeys = [];
   var isRoot = !vm.$parent;
@@ -46905,7 +46905,7 @@ function createPatchFunction (backend) {
   // list of modules that can skip create hook during hydration because they
   // are already rendered on the client or has no need for initialization
   // Note: style is excluded because it relies on initial clone for future
-  // deep updates (#7063).
+  // deep update (#7063).
   var isRenderedModule = makeMap('attrs,class,staticClass,staticStyle,key');
 
   // Note: this is a browser-only function so we can assume elms are DOM nodes.
@@ -46992,7 +46992,7 @@ function createPatchFunction (backend) {
           }
         }
         if (!fullInvoke && data['class']) {
-          // ensure collecting deps for deep class bindings for future updates
+          // ensure collecting deps for deep class bindings for future update
           traverse(data['class']);
         }
       }
@@ -48210,7 +48210,7 @@ function updateDOMProps (oldVnode, vnode) {
       // This  #4521 by skipping the unnecesarry `checked` update.
       cur !== oldProps[key]
     ) {
-      // some property updates can throw
+      // some property update can throw
       // e.g. `value` on <progress> w/ non-finite value
       try {
         elm[key] = cur;
@@ -51783,7 +51783,7 @@ function genScopedSlots (
   state
 ) {
   // by default scoped slots are considered "stable", this allows child
-  // components with only scoped slots to skip forced updates from parent.
+  // components with only scoped slots to skip forced update from parent.
   // but in some cases we have to bail-out of this optimization
   // for example if the slot contains dynamic names, has v-if or v-for on them...
   var needsForceUpdate = el.for || Object.keys(slots).some(function (key) {

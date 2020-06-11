@@ -9,6 +9,7 @@ class Subscribers extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'email'
+        'email',
+        'active'
     ];
 }

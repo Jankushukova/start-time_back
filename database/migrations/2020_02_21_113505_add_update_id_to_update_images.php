@@ -17,7 +17,7 @@ class AddUpdateIdToUpdateImages extends Migration
             $table->bigInteger('update_id')->unsigned();
             $table->foreign('update_id','fk_images_updates')
                 ->references('id')
-                ->on('updates');
+                ->on('update');
         });
     }
 

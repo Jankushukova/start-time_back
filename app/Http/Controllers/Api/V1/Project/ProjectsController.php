@@ -6,6 +6,8 @@ use App\Helpers\CollectionHelper;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\ProjectCategory;
+use App\ProjectGift;
+use App\ProjectImage;
 use App\ProjectLike;
 use App\ProjectOrder;
 use App\User;
@@ -30,14 +32,30 @@ class ProjectsController extends Controller
         return $project;
     }
 
+    public function filter(Request $request){
+        $searchText = $request->searchText;
+        $attribute = $request->attribute;
+        error_log($searchText);
+        error_log($attribute);
+        if($attribute==='owner'){
+            $projects = Project::with('user')
+                ->join('users', 'users.id','=','projects.owner_id')
+                ->where('users.firstname', 'like', '%' . $searchText . '%')
+                ->orWhere('users.lastname','like', '%' . $searchText . '%' )
+                ->get();
+        }else{
+            $projects = Project::with('user')->where($attribute, 'like', '%' . $searchText . '%')->get();
+        }
+        return CollectionHelper::paginate($projects, count($projects), $request->perPage);
+
+    }
+
 
     public function getAmountOfProjects(){
         return count(Project::all());
     }
 
     public function getAmountOfSuccessfulProjects(){
-//        $project = Project::findOrFail(5);
-//        echo $project->gathered<$project->goal;
         return count(Project::whereColumn('gathered', '>=', 'goal')->get());
     }
 
@@ -59,13 +77,15 @@ class ProjectsController extends Controller
         $ids = [];
         $projects =  Project::all()
         ->whereIn('id', ((Project::select(DB::raw('projects.id, COUNT(project_likes.id) as like_count'))
-            ->join('project_likes','project_likes.project_id','=','projects.id')
+            ->leftJoin('project_likes','project_likes.project_id','=','projects.id')
             ->groupBy('projects.id')
             ->orderBy('like_count', 'desc')
-            ->take(6)
+            ->where('projects.active', 1)
+            ->where('project_likes.deleted_at', null)
+            ->take(5)
             ->get())->map(function ($item, $key) {
             return $item['id'];
-        })))->where('active','=','1')->values();
+        })))->values();
 
         $projects = $projects->map(function ($item, $key){
             $item->images = $this->setImagePath($item->images);
@@ -108,6 +128,41 @@ class ProjectsController extends Controller
 
     public function getUserProjects(Request $request){
         $projects = Project::whereOwnerId($request->id)->where('active', 1)->with('likes', 'images', 'bakers')
+            ->get()
+            ->map(function($item, $key){
+                try {
+                    $user = JWTAuth::parseToken()->authenticate();
+                    $item['liked'] = $item->liked($user->id);
+
+                } catch (JWTException $e) {
+                }
+                return $item;
+            });
+
+        return CollectionHelper::paginate($projects, count($projects), $request->perPage);
+    }
+
+    public function getUserActiveProjects(Request $request){
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $projects = Project::whereOwnerId($user->id)->where('active', 1)->with('likes', 'images', 'bakers')
+            ->get()
+            ->map(function($item, $key){
+                try {
+                    $user = JWTAuth::parseToken()->authenticate();
+                    $item['liked'] = $item->liked($user->id);
+
+                } catch (JWTException $e) {
+                }
+                return $item;
+            });
+
+        return CollectionHelper::paginate($projects, count($projects), $request->perPage);
+    }
+    public function getUserUnActiveProjects(Request $request){
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $projects = Project::whereOwnerId($user->id)->whereActive(0)->orderBy('created_at','desc')->with('likes', 'images', 'bakers')
             ->get()
             ->map(function($item, $key){
                 try {
@@ -165,7 +220,7 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        $project = Project::whereId($id)->with('images', 'user', 'comments', 'questions', 'likes', 'updates', 'gifts')->first();
+        $project = Project::whereId($id)->with('category','images', 'user', 'comments', 'questions', 'likes', 'updates', 'gifts')->first();
         try {
             $user = JWTAuth::parseToken()->authenticate();
             $project['liked'] = $project->liked($user->id);
@@ -183,6 +238,10 @@ class ProjectsController extends Controller
         return $project;
     }
 
+    public function showOwnerOfProject($id){
+        return Project::findOrFail($id)->user;
+
+    }
 
 
     /**
@@ -205,7 +264,24 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
         $project = Project::findorFail($id);
+        $project->images;
+        $project->gifts;
+        $project->images->map(function ($item, $key){
+            ProjectImage::findOrFail($item->id)->delete();
+        });
+        $project->gifts->map(function ($item, $key){
+            ProjectGift::findOrFail($item->id)->delete();
+        });
         $project->update($request->all());
+        return $project;
+    }
+
+    public function changeState(Request $request){
+        $project = Project::findOrFail($request->id);
+        error_log('status');
+        error_log($project->active);
+        $project->active = !$project->active;
+        $project->save();
         return $project;
     }
 

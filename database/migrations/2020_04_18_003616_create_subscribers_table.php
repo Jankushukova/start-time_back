@@ -16,6 +16,7 @@ class CreateSubscribersTable extends Migration
         Schema::create('subscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('email');
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

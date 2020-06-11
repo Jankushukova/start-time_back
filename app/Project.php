@@ -5,6 +5,7 @@ namespace App;
 use App\Http\Controllers\Api\V1\Project\Active;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class Project extends Model
 {
@@ -95,4 +96,8 @@ class Project extends Model
         static::addGlobalScope(new Active());
     }
 
+    public function getDeadlineAttribute($key)
+    {
+        return Carbon::parse($key)->format('m/d/Y');
+    }
 }

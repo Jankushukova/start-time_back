@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\User;
 
+use App\Helpers\CollectionHelper;
 use App\Http\Controllers\Controller;
 use App\Subscribers;
 use Illuminate\Http\Request;
@@ -13,11 +14,25 @@ class SubscribersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Subscribers::all();
+        $subscribers = Subscribers::all();
+        return CollectionHelper::paginate($subscribers, count($subscribers), $request->perPage);
+
     }
 
+    public function filter(Request $request){
+        $searchText = $request->searchText;
+        $subscribers = Subscribers::where('subscribers.email', 'like', '%' . $searchText . '%')->get();
+        return CollectionHelper::paginate($subscribers, count($subscribers), $request->perPage);
+    }
+
+    public function changeStatus(Request $request){
+        $subscriber = Subscribers::findOrFail($request->id);
+        $subscriber->active = !$subscriber->active;
+        $subscriber->save();
+        return $subscriber;
+    }
     /**
      * Show the form for creating a new resource.
      *

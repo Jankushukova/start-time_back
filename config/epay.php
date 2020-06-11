@@ -10,11 +10,11 @@ return [
     'PUBLIC_KEY_PATH'           => storage_path('paysys/kkbca.pem'),
     'MERCHANT_ID'               => '98024241',
     // Линк для возврата покупателя в магазин (на сайт) после успешного проведения оплаты
-    'EPAY_BACK_LINK'            => 'https://localhost:4200/main',
+    'EPAY_BACK_LINK'            => env('FRONTEND_URL').'/main',
     // Линк для отправки результата авторизации в магазин.
-    'EPAY_POST_LINK'            => 'http://localhost:8000/api/v1/payment/success',
+    'EPAY_POST_LINK'            => env('APP_URL').'/api/v1/payment/success',
     // Линк для отправки неудачного результата авторизации либо информации об ошибке в магазин.
-    'EPAY_FAILURE_POST_LINK'    => 'http://localhost:8000/api/v1/payment/fail',
+    'EPAY_FAILURE_POST_LINK'    => env('APP_URL').'/api/v1/payment/fail',
 
     'EPAY_FORM_TEMPLATE'        => 'default.xsl',
 ];

@@ -9,8 +9,9 @@ class ProjectOrder extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'firstname',
+        'lastname',
+        'confirmed',
         'phone_number',
         'email',
         'viewed',

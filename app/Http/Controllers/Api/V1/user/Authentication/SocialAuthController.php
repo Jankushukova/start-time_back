@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\User\Authentication;
 
+use App\Role;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ class SocialAuthController extends Controller
                     'lastname' => $providerUser->lastName,
                     'password' => md5(rand(1,10000)),
                     'phone_number' => $providerUser->phoneNumber,
+                    'role_id' => Role::AUTHORIZED_CLIENT_ID
                 ]);
                 $user->email_verified_at = Carbon::now();
             }

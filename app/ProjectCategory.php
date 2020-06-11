@@ -9,7 +9,9 @@ class ProjectCategory extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'name'
+        'name_rus',
+        'name_kz',
+        'name_eng'
     ];
 
     public function projects(){

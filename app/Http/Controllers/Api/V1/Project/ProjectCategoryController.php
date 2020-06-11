@@ -65,8 +65,9 @@ class ProjectCategoryController extends Controller
      */
     public function show($id)
     {
-
-        return ProjectCategory::findorFail($id);
+        $category = ProjectCategory::findorFail($id);
+        $category->projects;
+        return $category;
     }
 
 

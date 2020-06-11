@@ -9,8 +9,12 @@ class Update extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'title',
-        'description',
+        'title_eng',
+        'title_rus',
+        'title_kz',
+        'description_eng',
+        'description_rus',
+        'description_kz',
         'project_id',
     ];
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1\News;
 use App\Helpers\CollectionHelper;
 use App\Http\Controllers\Controller;
 use App\News;
+use App\NewsImage;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -71,6 +72,7 @@ class NewsController extends Controller
 
         $news = News::findorFail($id);
         $news->images;
+        $news->likes;
         $news->comments->map(function($item, $key){
             $item->user;
             return $item;
@@ -98,9 +100,14 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image = News::findorFail($id);
-        $image->update($request->all());
-        return $image;
+        error_log($id);
+        $news = News::findorFail($id);
+        $news->images->map(function ($item, $key){
+            error_log($item->id);
+            NewsImage::findOrFail($item->id)->delete();
+        });
+        $news->update($request->all());
+        return $news;
     }
 
     /**

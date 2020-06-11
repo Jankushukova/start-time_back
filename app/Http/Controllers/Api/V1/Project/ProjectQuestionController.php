@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\ProjectQuestion;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProjectQuestionController extends Controller
 {
@@ -21,10 +23,22 @@ class ProjectQuestionController extends Controller
 
     public function getQuestionsOfProject($id)
     {
-        return Project::findOrFail($id)->questions->map(function ($item, $key){
-            $item->user;
-            return $item;
+
+        $project = Project::findOrFail($id);
+        $questions = ProjectQuestion::whereProjectId($id)->with('user', 'project')
+            ->get()->filter(function ($item, $key){
+            try {
+                $authorizedUser = JWTAuth::parseToken()->authenticate();
+                if($authorizedUser->id === $item->user->id || $authorizedUser->id == $item->project->owner_id){
+                    return $item;
+                }
+
+            } catch (JWTException $e) {
+            }
+            return $item->answer != null;
         });
+        return $questions;
+
     }
 
     /**
@@ -80,9 +94,11 @@ class ProjectQuestionController extends Controller
      * @param  \App\ProjectQuestion  $projectQuestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProjectQuestion $projectQuestion)
+    public function update(Request $request, $id)
     {
-        //
+        $question = ProjectQuestion::findorFail($id);
+        $question->update($request->all());
+        return $question;
     }
 
     /**

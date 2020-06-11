@@ -35,9 +35,9 @@ class UsersController extends Controller
     public function UserProfileInformation(){
         $user = JWTAuth::parseToken()->authenticate();
         $user->image = asset($user->image);
-        $user['projectsCount'] = Project::whereOwnerId($user->id)->count();
+        $user['projectsCount'] = Project::whereOwnerId($user->id)->whereActive(1)->count();
         $user['bakersCount'] = count(ProjectOrderController::getUserBakers($user->id));
-        $user['bakedCount'] = ProjectOrder::whereUserId($user->id)->count();
+        $user['bakedCount'] = ProjectOrder::whereUserId($user->id)->where('confirmed', 1)->count();
         $user['followersCount'] = Follower::whereFollowedId($user->id)->count();
         $user['followedCount'] = Follower::whereFollowingId($user->id)->count();
         $user['recommendationCount'] = count($this->buildRecommendations($user));
@@ -80,7 +80,7 @@ class UsersController extends Controller
     }
     public function open()
     {
-        return "dvavdavdavdavdav";
+        return response()->json([],200);
 
     }
 
@@ -98,11 +98,21 @@ class UsersController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return User::all();
+        $users = User::with('projects')->get();
+        return CollectionHelper::paginate($users, count($users), $request->perPage);
+
     }
 
+    public function filter(Request $request){
+        $searchText = $request->searchText;
+        $users = User::with('projects')
+            ->where('users.firstname', 'like', '%' . $searchText . '%')
+            ->orWhere('users.lastname', 'like', '%' . $searchText . '%')
+            ->get();
+        return CollectionHelper::paginate($users, count($users), $request->perPage);
+    }
 
 
     /**
@@ -134,7 +144,10 @@ class UsersController extends Controller
         $user->baked;
 
         $user->followers;
-        $user->projects;
+        $user['projects'] = Project::whereOwnerId($id)->get()->filter(function ($item, $key){
+            error_log($item->active == 1);
+            return $item->active != 0;
+        })->values();
         return $user;
     }
 
@@ -149,6 +162,39 @@ class UsersController extends Controller
     {
     }
 
+    public function updateAdmin(Request $request){
+        $user = User::findOrFail($request->id);
+        if($request->firstname != $user->firstname){
+            error_log('firstnmae no t==equal');
+            $user->firstname = $request->firstname;
+        }
+        if($request->lastname != $user->lastname){
+            error_log('lastname no t==equal');
+            $user->lastname = $request->lastname;
+        }
+        if($request->phone_number != $user->phone_number){
+            error_log('phone no t==equal');
+            $user->phone_number = $request->phone_number;
+        }
+        if($request->biography != $user->biography){
+            error_log('biography no t==equal');
+            $user->biography = $request->biography;
+        }
+        if($request->email != $user->email){
+            error_log('email no t==equal');
+            $user->email = $request->email;
+            $user->email_verified_at = null;
+            $user->sendApiEmailVerificationNotification();
+        }
+        if($request->role_id != $user->role_id){
+            error_log('role not equal');
+            $user->role_id = $request->role_id;
+        }
+
+        $user->save();
+        return $user;
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -156,11 +202,35 @@ class UsersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $course = User::findorFail($id);
-        $course->update($request->all());
-        return $course;
+
+        $user = JWTAuth::parseToken()->authenticate();
+        if($request->firstname != $user->firstname){
+            error_log('firstnmae no t==equal');
+            $user->firstname = $request->firstname;
+        }
+        if($request->lastname != $user->lastname){
+            error_log('lastname no t==equal');
+            $user->lastname = $request->lastname;
+        }
+        if($request->phone_number != $user->phone_number){
+            error_log('phone no t==equal');
+            $user->phone_number = $request->phone_number;
+        }
+        if($request->biography != $user->biography){
+            error_log('biography no t==equal');
+            $user->biography = $request->biography;
+        }
+        if($request->email != $user->email){
+            error_log('email no t==equal');
+            $user->email = $request->email;
+            $user->email_verified_at = null;
+            $user->sendApiEmailVerificationNotification();
+        }
+
+        $user->save();
+        return $user;
     }
 
     /**

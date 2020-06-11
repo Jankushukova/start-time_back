@@ -13,10 +13,14 @@ class CreateUpdatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('updates', function (Blueprint $table) {
+        Schema::create('update', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->text('description');
+            $table->string('title_eng')->nullable();
+            $table->string('title_rus')->nullable();
+            $table->string('title_kz')->nullable();
+            $table->text('description_rus')->nullable();
+            $table->text('description_eng')->nullable();
+            $table->text('description_kz')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +33,6 @@ class CreateUpdatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('updates');
+        Schema::dropIfExists('update');
     }
 }

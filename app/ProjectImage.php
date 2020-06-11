@@ -9,7 +9,6 @@ class ProjectImage extends Model
 {
     const PATH = 'images/project';
 
-    use SoftDeletes;
     protected $fillable = [
         'image',
         'project_id'

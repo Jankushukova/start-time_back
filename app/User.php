@@ -97,7 +97,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
     public function baked(){
-        return $this->belongsToMany('App\Project', 'project_orders', 'user_id', 'project_id');
+        return $this->belongsToMany('App\Project', 'project_orders', 'user_id', 'project_id')->where('confirmed', 1);
     }
 
     public function payments(){

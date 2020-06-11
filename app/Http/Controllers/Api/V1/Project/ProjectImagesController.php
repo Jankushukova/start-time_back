@@ -7,6 +7,7 @@ use App\ProductImage;
 use App\Project;
 use App\ProjectImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectImagesController extends Controller
 {
@@ -40,17 +41,23 @@ class ProjectImagesController extends Controller
      */
     public function store(Request $request)
     {
+        error_log('store');
          $i = 1;
-        while ($request->hasFile('image'.$i))
+        while ($request->has('image'.$i))
         {
-            $file      = $request->file('image'.$i);
-            $filename  = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $picture   = date('His').'-'.$filename;
-            $file->move(public_path(ProjectImage::PATH), $picture);
-            $i++;
             $image = new ProjectImage();
-            $image->image = ProjectImage::PATH.'/'.$picture;
+            if($request->hasFile('image'.$i)){
+                $file      = $request->file('image'.$i);
+                $filename  = $file->getClientOriginalName();
+                $picture   = date('His').'-'.$filename;
+                $file->move(public_path(ProjectImage::PATH), $picture);
+                $image->image = ProjectImage::PATH.'/'.$picture;
+            }
+            else if( $request->has('image'.$i)){
+                $image->image = str_replace(asset('/'), '' ,$request->get('image'.$i));
+
+            }
+            $i++;
             if($request->has('project_id')){
                 $image->project_id = $request->get('project_id');
                 $image->save();
