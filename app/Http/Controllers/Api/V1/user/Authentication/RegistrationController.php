@@ -33,6 +33,7 @@ class RegistrationController extends Controller
         $user = User::create($request->all());
         $user->password = Hash::make($user->password);
         $user->role_id = Role::AUTHORIZED_CLIENT_ID;
+        $user->fullname = $user->firstname . ' ' .  $user->lastname;
         $user->save();
         $user->sendApiEmailVerificationNotification();
         $success['message'] = 'Please confirm yourself by clicking on verify user button sent to you on your email';

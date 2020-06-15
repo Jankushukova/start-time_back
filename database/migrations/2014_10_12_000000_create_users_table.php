@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('firstname',255);
             $table->string('lastname',255);
+            $table->string('fullname',255);
             $table->string('phone_number',255);
             $table->string('image',255)->default('images/user/11_0.png');
             $table->text('biography')->nullable();
@@ -29,7 +30,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
+
+        \Illuminate\Support\Facades\DB::statement('UPDATE users SET fullname = firstname + lastname');
     }
 
     /**

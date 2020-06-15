@@ -107,9 +107,9 @@ class UsersController extends Controller
 
     public function filter(Request $request){
         $searchText = $request->searchText;
+        error_log($searchText);
         $users = User::with('projects')
-            ->where('users.firstname', 'like', '%' . $searchText . '%')
-            ->orWhere('users.lastname', 'like', '%' . $searchText . '%')
+            ->where('users.fullname', 'like', '%' . $searchText . '%')
             ->get();
         return CollectionHelper::paginate($users, count($users), $request->perPage);
     }

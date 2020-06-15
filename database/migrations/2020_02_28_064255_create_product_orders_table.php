@@ -18,8 +18,9 @@ class CreateProductOrdersTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone_number')->nullable();
+            $table->string('confirmed')->default(false);
             $table->string('email')->nullable();
-            $table->boolean('active');
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

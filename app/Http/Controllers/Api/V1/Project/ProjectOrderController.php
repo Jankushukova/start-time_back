@@ -151,6 +151,7 @@ class ProjectOrderController extends Controller
         $payment->order_id = $request->id;
         $payment->save();
         $order->confirmed = 1;
+        $order->save();
         return $order;
     }
     public function cloudFailure(Request $request){

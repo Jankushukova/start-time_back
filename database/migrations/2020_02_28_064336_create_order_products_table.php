@@ -16,7 +16,6 @@ class CreateOrderProductsTable extends Migration
         Schema::create('order_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('count');
-            $table->text('comment');
             $table->timestamps();
             $table->softDeletes();
 

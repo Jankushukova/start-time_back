@@ -12,7 +12,7 @@ class ProductImageController extends Controller
 {
     public function index()
     {
-        return NewsImage::all();
+        return ProductImage::all();
     }
 
 
@@ -35,9 +35,30 @@ class ProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        $image = NewsImage::create($request->all());
-        $image->save();
-        return $image;
+        $i = 1;
+        while ($request->has('image'.$i))
+        {
+            $image = new ProductImage();
+            if($request->hasFile('image'.$i)){
+                $file      = $request->file('image'.$i);
+                $filename  = $file->getClientOriginalName();
+                $picture   = date('His').'-'.$filename;
+                $file->move(public_path(ProductImage::PATH), $picture);
+                $image->image = ProductImage::PATH.'/'.$picture;
+            }
+            else if( $request->has('image'.$i)){
+                $image->image = str_replace(asset('/'), '' ,$request->get('image'.$i));
+
+            }
+            $i++;
+            if($request->has('product_id')){
+                $image->product_id = $request->get('product_id');
+                $image->save();
+            }
+            else{
+                return response()->json(["error" => "Select image first."]);
+            }
+        }
     }
 
     /**

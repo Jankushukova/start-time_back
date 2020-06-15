@@ -116,6 +116,9 @@ Route::group([
             Route::get('product/show/{id}', ['uses' => 'ProductController@show', 'as' => 'products.show'])->where('id', '[0-9]+');//+
             Route::get('product/images/{id}', ['uses' => 'ProductImageController@getImages', 'as' => 'product.images'])->where('id', '[0-9]+');//+
             Route::post('product/view/add', ['uses' => 'ProductController@addView', 'as' => 'product.view']);//+
+            Route::post('product/orders/create', ['uses' => 'ProductOrderController@store', 'as' => 'order.store']);//+
+            Route::post('product/orders/payment', ['uses' => 'ProductOrderController@payment', 'as' => 'order.payment']);//+
+            Route::post('product/orders/cloud/success', ['uses' => 'ProductOrderController@cloudSuccess', 'as' => 'order.success']);//+
             //most popular
             Route::get('product/popular', ['uses' => 'ProductController@getMostPopular', 'as' => 'products.popular']);//+
 
@@ -141,6 +144,7 @@ Route::group([
                 Route::get('projects/user/baked/{id}', 'ProjectOrderController@getUserBakedProjects')->where('id', '[0-9]+');//+
                 Route::get('user/projects/active', 'ProjectsController@getUserActiveProjects');//+
                 Route::get('user/projects/unactive', 'ProjectsController@getUserUnActiveProjects');//+
+                Route::get('user/projects/finished', 'ProjectsController@getUserFinishedProjects');//+
 
 
 
@@ -176,7 +180,11 @@ Route::group([
                 //products
                 Route::post('product', ['uses' => 'ProductController@store', 'as' => 'product.store']);//+
                 Route::post('product/create/images', ['uses' => 'ProductImageController@store', 'as' => 'images.store']);//+
+                Route::delete('product/{id}', ['uses' => 'ProductController@destroy', 'as' => 'product.store'])->where('id', '[0-9]+');//+
                 Route::post('product/order', ['uses' => 'ProductOrderController@store', 'as' => 'order.store']);//+
+                Route::get('user/products/active', 'ProductController@getUserActiveProducts');//+
+                Route::get('user/products/unactive', 'ProductController@getUserUnActiveProducts');//+
+
                 //likes
                 Route::post('product/like', ['uses' => 'ProductLikeController@store', 'as' => 'product.store']);//+
                 Route::delete('product/like/{id}', ['uses' => 'ProductLikeController@destroy', 'as' => 'product.destroy'])->where('id', '[0-9]+');//+
@@ -251,14 +259,18 @@ Route::group([
                 Route::namespace('product')->group(function () {
                     // products
                     Route::get('product/all', ['uses' => 'ProductController@getAllProducts', 'as' => 'product.index'])->where('id', '[0-9]+');//+
-                    Route::delete('product/{id}', ['uses' => 'ProductController@destroy', 'as' => 'product.store'])->where('id', '[0-9]+');//+
+                    Route::get('product/filter', ['uses' => 'ProductController@filter', 'as' => 'product.filter'])->where('id', '[0-9]+');//+
                     Route::put('product/{id}', ['uses' => 'ProductController@update', 'as' => 'product.update'])->where('id', '[0-9]+');//+
+                    Route::put('product/change/state', ['uses' => 'ProductController@changeState', 'as' => 'projects.state'])->where('id', '[0-9]+');//+
 
                     //order
-                    Route::get('product/order/{id}', ['uses' => 'ProductOrderController@getOrdersOfProduct', 'as' => 'product.orders']);//+
+//                    Route::get('product/order/{id}', ['uses' => 'ProductOrderController@getOrdersOfProduct', 'as' => 'product.orders']);//+
+                    Route::get('product/order/all', ['uses' => 'ProductOrderController@getOrders', 'as' => 'product.orders']);//+
                     Route::delete('product/order/{id}', ['uses' => 'ProductOrderController@destroy', 'as' => 'product.destroy'])->where('id', '[0-9]+');//+
                     Route::put('product/order/{id}', ['uses' => 'ProductOrderController@update', 'as' => 'product.update'])->where('id', '[0-9]+');//+
                     Route::get('product/order/{id}', ['uses' => 'ProductOrderController@show', 'as' => 'product.show'])->where('id', '[0-9]+');//+
+                    Route::get('product/order/filter', ['uses' => 'ProductOrderController@filter', 'as' => 'product.filter'])->where('id', '[0-9]+');//+
+                    Route::get('product/order/bakers/bank', ['uses' => 'ProductOrderController@getOrdersOfBank', 'as' => 'orders.bank'])->where('id', '[0-9]+');//+
 
                     //orders
                     Route::get('product/payments/{id}', ['uses' => 'ProductPaymentController@getPaymentsOfProduct', 'as' => 'product.payments'])->where('id', '[0-9]+');//+

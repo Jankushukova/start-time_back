@@ -9,6 +9,9 @@ use Illuminate\Support\Carbon;
 
 class Project extends Model
 {
+    const ACTIVE_PROJECT = 1;
+    const UN_ACTIVE_PROJECT = 0;
+    const FINISHED_PROJECT = 2;
     use SoftDeletes;
     protected $fillable = [
         'title_rus',

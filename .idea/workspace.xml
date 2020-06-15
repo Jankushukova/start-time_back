@@ -19,55 +19,27 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b531a1e4-7462-4ea8-aed8-6da446ddf591" name="Default Changelist" comment="payment added 2">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="b531a1e4-7462-4ea8-aed8-6da446ddf591" name="Default Changelist" comment="pre last changes">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/794e1c7c-3cbb-41c7-a689-67e432bd26ea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/794e1c7c-3cbb-41c7-a689-67e432bd26ea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Payment/KKB/KKB.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Payment/KKB/KKBSign.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Payment/PayBoxMoney/PayBoxMoney.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Payment/Payment.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Payment/PaymentException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Payment/PaymentFactory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/PaymentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/Active.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectCategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectGiftsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectGiftsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectImagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectImagesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectOrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectQuestionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectQuestionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/ProjectsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/UpdatesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/Project/UpdatesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsImagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/news/NewsImagesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/Authentication/SocialAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/Authentication/SocialAuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/SubscribersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/SubscribersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/user/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/NewsImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/NewsImage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductImageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductImageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/product/ProductOrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/OrderProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/OrderProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ProductImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProductImage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ProductOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProductOrder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Project.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProjectCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProjectCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProjectImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProjectImage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProjectOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProjectOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProjectQuestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProjectQuestion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Subscribers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subscribers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Update.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/UpdateImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UpdateImage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/epay.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/epay.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_090255_create_projects_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_090255_create_projects_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_105425_create_project_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_105425_create_project_categories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_105540_create_updates_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_105540_create_updates_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_113006_create_project_images_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_113006_create_project_images_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_113436_add_project_id_to_updates.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_113436_add_project_id_to_updates.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_113505_add_update_id_to_update_images.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_113505_add_update_id_to_update_images.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_28_064202_create_project_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_28_064202_create_project_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_02_110244_create_project_payments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_02_110244_create_project_payments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_17_225601_create_news_images_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_17_225601_create_news_images_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_18_003616_create_subscribers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_18_003616_create_subscribers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/front/js/jquery.dataTables.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/front/js/jquery.dataTables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/front/vendors/datatables.net/jquery.dataTables.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/front/vendors/datatables.net/jquery.dataTables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_105858_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_105858_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_21_110139_create_product_images_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_110139_create_product_images_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_28_064255_create_product_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_28_064255_create_product_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_28_064336_create_order_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_28_064336_create_order_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_27_205241_add_user_id_to_product_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_27_205241_add_user_id_to_product_orders.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -221,17 +193,17 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Archet\Desktop\st\start-time_back\storage\paysys" />
+      <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Http\Controllers\Api\V1" />
+      <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Http\Controllers\Api\V1\Payment" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Http\Controllers" />
       <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Http\Controllers\Api\V1\User\Authentication" />
       <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Http\Controllers\Api\V1\User\authentication" />
       <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Helpers" />
       <recent name="C:\Users\Archet\Desktop\st\start-time_back\app" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Archet\Desktop\st\start-time_back\storage\paysys" />
-      <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Http\Controllers\Api\V1" />
-      <recent name="C:\Users\Archet\Desktop\st\start-time_back\app\Http\Controllers\Api\V1\Payment" />
     </key>
   </component>
   <component name="RunManager">
@@ -332,7 +304,11 @@
       <workItem from="1591635835943" duration="6377000" />
       <workItem from="1591677343940" duration="6987000" />
       <workItem from="1591729042739" duration="13659000" />
-      <workItem from="1591862489351" duration="819000" />
+      <workItem from="1591862489351" duration="3517000" />
+      <workItem from="1591951044375" duration="6152000" />
+      <workItem from="1592075811633" duration="38000" />
+      <workItem from="1592076287748" duration="16268000" />
+      <workItem from="1592191618848" duration="18451000" />
     </task>
     <task id="LOCAL-00001" summary="seoncd commit">
       <created>1586912562186</created>
@@ -404,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591086397768</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="pre last changes">
+      <created>1591870192122</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1591870192122</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -436,7 +419,8 @@
     <MESSAGE value="profile fixed" />
     <MESSAGE value="payment added" />
     <MESSAGE value="payment added 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="payment added 2" />
+    <MESSAGE value="pre last changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="pre last changes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="83" y="146" width="732" height="644" key="#Inspections" timestamp="1588842547238">
@@ -448,10 +432,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="654" y="275" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1587309444280" />
-    <state x="432" y="147" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590576583202">
+    <state x="432" y="141" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592075863565">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="432" y="147" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1590576583202" />
+    <state x="432" y="141" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1592075863565" />
     <state x="590" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589428443988" />
     <state x="538" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591039447634">
       <screen x="0" y="0" width="1536" height="824" />
@@ -462,10 +446,10 @@
     </state>
     <state x="574" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1591054748040" />
     <state x="761" y="27" width="422" height="538" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589429539623" />
-    <state x="499" y="167" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591596020933">
+    <state x="499" y="167" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592216196664">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591596020933" />
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592216196664" />
     <state x="671" y="240" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589542135805" />
     <state x="534" y="101" width="912" height="911" key="CommitChangelistDialog2" timestamp="1589547768559">
       <screen x="70" y="27" width="1850" height="1053" />
@@ -510,33 +494,33 @@
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587312519942" />
     <state x="404" y="100" width="1022" height="737" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588995317419" />
-    <state x="361" y="145" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1591086399723">
+    <state x="361" y="145" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1591870206330">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591086399723" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591870206330" />
     <state x="505" y="212" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053@70.27.1850.1053" timestamp="1589547746939" />
-    <state x="611" y="0" width="367" height="333" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1591601543028">
+    <state x="611" y="0" width="367" height="333" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1592095716756">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="611" y="0" width="312" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1591601543028" />
+    <state x="611" y="0" width="312" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1592095716756" />
     <state x="806" y="27" width="367" height="333" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/70.27.1850.1053@70.27.1850.1053" timestamp="1589449417195" />
     <state x="566" y="232" width="403" height="355" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1591054438343">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="566" y="232" width="403" height="355" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1536.824@0.0.1536.824" timestamp="1591054438343" />
-    <state x="431" y="24" width="743" height="590" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1591856829021">
+    <state x="431" y="24" width="743" height="590" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1592219409481">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="24" width="743" height="590" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1591856829021" />
+    <state x="431" y="24" width="743" height="590" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1592219409481" />
     <state x="517" y="265" width="526" height="464" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1589772246040" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1587311579485">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1587311579485" />
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587309101731">
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591869982085">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1587309101731" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1591869982085" />
     <state x="720" y="427" width="535" height="206" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1588995137091">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>

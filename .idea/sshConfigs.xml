@@ -58,6 +58,11 @@
       <sshConfig authType="PASSWORD" host="89.219.13.110" id="9459b065-064d-4284-b337-5c3157d54aee" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
       <sshConfig authType="PASSWORD" host="89.219.13.110" id="fc54ac2a-475a-4ba5-b854-b3a7be06ec61" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
       <sshConfig authType="PASSWORD" host="89.219.13.110" id="d5232bff-58a8-433c-b099-a2534ec70a08" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
+      <sshConfig authType="PASSWORD" host="89.219.13.110" id="109f1ed6-feb8-4653-9d38-99678f9bdad7" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
+      <sshConfig authType="PASSWORD" host="89.219.13.110" id="690ffdc2-689f-4c1b-897c-b16709cc5b2d" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
+      <sshConfig authType="PASSWORD" host="89.219.13.110" id="d57a2b4a-4fc0-460d-883e-80276b9a35ab" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
+      <sshConfig authType="PASSWORD" host="89.219.13.110" id="f69a2643-abc6-42c1-af5e-5b539f6cce92" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
+      <sshConfig authType="PASSWORD" host="89.219.13.110" id="9c0a94ea-aa6c-4c51-abd3-b6d50c0913a2" port="22" customName="89.219.13.110" nameFormat="CUSTOM" />
     </configs>
   </component>
 </project>

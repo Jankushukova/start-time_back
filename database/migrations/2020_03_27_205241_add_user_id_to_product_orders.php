@@ -14,7 +14,7 @@ class AddUserIdToProductOrders extends Migration
     public function up()
     {
         Schema::table('product_orders', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id','fk_product_orders_user')
                 ->references('id')
                 ->on('users');

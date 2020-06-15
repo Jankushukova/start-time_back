@@ -145,7 +145,7 @@ class ProjectsController extends Controller
     public function getUserActiveProjects(Request $request){
         $user = JWTAuth::parseToken()->authenticate();
 
-        $projects = Project::whereOwnerId($user->id)->where('active', 1)->with('likes', 'images', 'bakers')
+        $projects = Project::whereOwnerId($user->id)->where('active', Project::ACTIVE_PROJECT)->with('likes', 'images', 'bakers')
             ->get()
             ->map(function($item, $key){
                 try {
@@ -162,7 +162,24 @@ class ProjectsController extends Controller
     public function getUserUnActiveProjects(Request $request){
         $user = JWTAuth::parseToken()->authenticate();
 
-        $projects = Project::whereOwnerId($user->id)->whereActive(0)->orderBy('created_at','desc')->with('likes', 'images', 'bakers')
+        $projects = Project::whereOwnerId($user->id)->whereActive(Project::UN_ACTIVE_PROJECT)->orderBy('created_at','desc')->with('likes', 'images', 'bakers')
+            ->get()
+            ->map(function($item, $key){
+                try {
+                    $user = JWTAuth::parseToken()->authenticate();
+                    $item['liked'] = $item->liked($user->id);
+
+                } catch (JWTException $e) {
+                }
+                return $item;
+            });
+
+        return CollectionHelper::paginate($projects, count($projects), $request->perPage);
+    }
+    public function getUserFinishedProjects(Request $request){
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $projects = Project::whereOwnerId($user->id)->whereActive(Project::FINISHED_PROJECT)->orderBy('created_at','desc')->with('likes', 'images', 'bakers')
             ->get()
             ->map(function($item, $key){
                 try {
@@ -280,7 +297,7 @@ class ProjectsController extends Controller
         $project = Project::findOrFail($request->id);
         error_log('status');
         error_log($project->active);
-        $project->active = !$project->active;
+        $project->active = $request->state;
         $project->save();
         return $project;
     }
